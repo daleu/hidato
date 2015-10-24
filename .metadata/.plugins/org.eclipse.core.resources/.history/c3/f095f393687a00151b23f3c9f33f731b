@@ -1,0 +1,14 @@
+package usuarios;
+
+public class GestorUsrs {
+	
+	private Usuario[] users;
+	
+	public GestorUsrs() {
+		
+	}
+	
+	public void addUser(String u, String p) {
+		users[users.length] = new Usuario(u, p);
+	}
+}

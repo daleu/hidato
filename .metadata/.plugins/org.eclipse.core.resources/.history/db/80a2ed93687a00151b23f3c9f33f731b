@@ -1,0 +1,52 @@
+import java.util.Scanner;
+import usuarios.GestorUsrs;
+
+public class CtrPresUser {
+	
+	private Scanner input;
+	private GestorUsrs gu;
+	
+	public static final int OP_LOGIN = 1;
+	public static final int OP_REGISTER = 2;
+	public static final int OP_BACK = 3;
+	public static final int OP_LOGOUT = 4;
+	
+	public CtrPresUser() {
+		gu = new GestorUsrs();
+	}
+	
+	public void setInput(Scanner input) {
+		this.input = input;
+	}
+	
+	public void login() {
+		System.out.println("Login:");
+		System.out.println("Escribe tu nombre de usuario");
+		String u = input.next();
+		//check si el usuario existe
+		System.out.println("Escribe tu password");
+		String p = input.next();
+		//check si tiene este pass
+	}
+	
+	public void register() {
+		System.out.println("Registro:");
+		System.out.println("Escribe tu nombre de usuario");
+		String u = input.next();
+		System.out.println("Escribe tu password");
+		String p = input.next();
+		System.out.println("Confirma tu password");
+		String p2 = input.next();
+		if(p.equals(p2)) {
+			gu.addUser(u, p);
+		}
+		else {
+			System.out.println("Las password no coinciden.");
+			register();
+		}
+	}
+	
+	public void logout() {
+		input.close();
+	}
+}

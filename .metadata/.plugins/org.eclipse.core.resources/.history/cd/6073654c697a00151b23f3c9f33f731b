@@ -1,0 +1,14 @@
+package usuarios;
+
+public class CtrUsr {
+	
+	private Usuario[] users;
+	
+	public CtrUsr() {
+		
+	}
+	
+	public void addUser(String u, String p) {
+		users[users.length] = new Usuario(u, p);
+	}
+}
