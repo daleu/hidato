@@ -9,7 +9,7 @@ public class GestorUsr {
 	}
 	
 	public void addUser(Usuario u) {
-		//users[users.length] = u;
+		
 		
 	}
 }
