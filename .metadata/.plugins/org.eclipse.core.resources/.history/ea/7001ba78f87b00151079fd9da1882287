@@ -11,8 +11,7 @@ public class Main {
 	public static final int OP_PARRAP = 3;
 	public static final int OP_RANK = 4;
 	public static final int OP_GESTUS = 5;
-	public static final int OP_MENUANT = 6;
-	public static final int OP_EXT = 7;
+	public static final int OP_EXT = 6;
 	
 	
 	private static CtrPresUser cpu		= new CtrPresUser();
@@ -41,7 +40,7 @@ public class Main {
 			case OP_LOGIN:
 				System.out.println("Bienvenido");
 				cpu.login();
-				segonMenu(input, b);
+				segonMenu(input);
 				
 				break;
 			
@@ -64,15 +63,14 @@ public class Main {
 		}
 	}
 	
-	public static void segonMenu(Scanner input, boolean b){
+	public static void segonMenu(Scanner input){
 		System.out.println("\nOpciones:");
 		System.out.println(OP_EDITOR + ". Editor");
 		System.out.println(OP_REP + ". Repositorio");
 		System.out.println(OP_PARRAP + ". Partida Rápida");
 		System.out.println(OP_RANK + ". Ranking");
 		System.out.println(OP_GESTUS + ". Gestionar cuenta");
-		System.out.println(OP_MENUANT + ". Salir al menu principal");
-		System.out.println(OP_EXT + ". Salir");
+		System.out.println(OP_EXT + ". Salir al menu principal");
 		
 		int op = input.nextInt();
 		
@@ -103,14 +101,8 @@ public class Main {
 			cpu.usrs();
 			break;
 			
-		case OP_MENUANT:
-			System.out.println("Volviendo al menu de inicio...");
-			break;
-			
 		case OP_EXT:
-			System.out.println("Cerrando...");
-			input.close();
-			b = false;
+			System.out.println("Volviendo al menu de inicio...");
 			break;
 			
 		default:

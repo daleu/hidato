@@ -41,7 +41,7 @@ public class Main {
 			case OP_LOGIN:
 				System.out.println("Bienvenido");
 				cpu.login();
-				segonMenu(input, b);
+				segonMenu(input);
 				
 				break;
 			

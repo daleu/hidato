@@ -56,8 +56,4 @@ public class CtrPresUser {
 	public void logout() {
 		input.close();
 	}
-	
-	public void usrs(){
-		
-	}
 }
