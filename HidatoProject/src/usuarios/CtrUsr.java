@@ -9,8 +9,14 @@ public class CtrUsr {
 		gu = new GestorUsr();
 	}
 	
-	public void addUser(String u, String p) {
+	public void addUser1(String u, String p) {
 		current = new Usuario(u, p);
-		gu.addUser(current);
+		gu.addUser2(current);
+	}
+	
+	public boolean isUser1(String u, String p){
+		current = new Usuario(u,p);
+		boolean exist = gu.isUser2(current);
+		return exist;
 	}
 }

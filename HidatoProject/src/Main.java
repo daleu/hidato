@@ -2,9 +2,17 @@ import java.util.Scanner;
 
 public class Main {
 	
-	public static final int OP_LOGIN = 1;
+	public static final int OP_LOGIN = 1;			//Opcions primer menu
 	public static final int OP_REGISTER = 2;
 	public static final int OP_EXIT = 3;
+	
+	public static final int OP_EDITOR = 1;			//Opcions segon menu
+	public static final int OP_REP = 2;
+	public static final int OP_PARRAP = 3;
+	public static final int OP_RANK = 4;
+	public static final int OP_GESTUS = 5;
+	public static final int OP_EXT = 6;
+	
 	
 	private static CtrPresUser cpu		= new CtrPresUser();
 	private static CtrPresHidato cph	= new CtrPresHidato();
@@ -32,6 +40,8 @@ public class Main {
 			case OP_LOGIN:
 				System.out.println("Hola de nuevo");
 				cpu.login();
+				segonMenu(input);
+				
 				break;
 			
 			case OP_REGISTER:
@@ -51,6 +61,18 @@ public class Main {
 			}
 
 		}
+	}
+	
+	public static void segonMenu(Scanner input){
+		System.out.println("\nOpciones:");
+		System.out.println(OP_EDITOR + ". Editor");
+		System.out.println(OP_REP + ". Repositorio");
+		System.out.println(OP_PARRAP + ". Partida Rápida");
+		System.out.println(OP_RANK + ". Ranking");
+		System.out.println(OP_GESTUS + ". Gestionar cuenta");
+		System.out.println(OP_EXT + ". Salir");
+		
+		
 	}
 
 }

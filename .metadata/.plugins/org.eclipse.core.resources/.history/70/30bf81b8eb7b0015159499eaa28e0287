@@ -1,0 +1,26 @@
+package usuarios;
+import java.util.Vector;
+
+public class GestorUsr {
+	
+	private Vector <Usuario> users;
+	
+	public GestorUsr() {
+		users = new Vector<Usuario>();
+	}
+	
+	public void addUser2(Usuario u) {
+		users.add(u);
+	}
+	
+	public boolean isUser2(Usuario u){
+		boolean exist=false;
+		for (int i=0; i<users.size();++i){
+			if ((users.elementAt(i).getUser() == u.getUser()) & 
+			(users.elementAt(i).getPassword() == u.getPassword())){
+				exist=true;
+			}
+		}
+		return exist;
+	}
+}

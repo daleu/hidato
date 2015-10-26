@@ -9,4 +9,12 @@ public class Usuario {
 		this.username = u;
 		this.password = p;
 	}
+	
+	public String getUser(){
+		return username;
+	}
+	
+	public String getPassword(){
+		return password;
+	}
 }
