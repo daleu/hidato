@@ -1,10 +1,10 @@
 import java.util.Scanner;
-import usuarios.CtrUsr;
+import usuarios.CtrDomUsr;
 
 public class CtrPresUser {
 	
 	private Scanner input;
-	private CtrUsr cu;
+	private CtrDomUsr cu;
 	
 	public static final int OP_LOGIN = 1;
 	public static final int OP_REGISTER = 2;
@@ -12,7 +12,7 @@ public class CtrPresUser {
 	public static final int OP_LOGOUT = 4;
 	
 	public CtrPresUser() {
-		cu = new CtrUsr();
+		cu = new CtrDomUsr();
 	}
 	
 	public void setInput(Scanner input) {

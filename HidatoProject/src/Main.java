@@ -22,6 +22,7 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner input 	= new Scanner(System.in);
 		cpu.setInput(input);
+		
 		boolean b = true;
 		int op = 0;
 		
@@ -41,7 +42,7 @@ public class Main {
 			case OP_LOGIN:
 				System.out.println("Bienvenido");
 				cpu.login();
-				segonMenu(input, b);
+				segonMenu(input);
 				
 				break;
 			
@@ -64,7 +65,7 @@ public class Main {
 		}
 	}
 	
-	public static void segonMenu(Scanner input, boolean b){
+	public static void segonMenu(Scanner input){
 		System.out.println("\nOpciones:");
 		System.out.println(OP_EDITOR + ". Editor");
 		System.out.println(OP_REP + ". Repositorio");
@@ -90,6 +91,7 @@ public class Main {
 		
 		case OP_PARRAP:
 			System.out.println("Partida Rápida");
+			cph.setInput(input);
 			cph.partidaRapida();
 			break;
 		
@@ -110,7 +112,7 @@ public class Main {
 		case OP_EXT:
 			System.out.println("Cerrando...");
 			input.close();
-			b = false;
+			System.exit(0);
 			break;
 			
 		default:

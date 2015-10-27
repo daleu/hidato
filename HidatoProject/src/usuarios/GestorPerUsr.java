@@ -1,22 +1,22 @@
 package usuarios;
 //import java.util.Vector;
 
-public class GestorUsr {
+public class GestorPerUsr {
 	
-	private Usuario[] users;
+	private UsuarioDom[] users;
 	private int nombre; 
 	
-	public GestorUsr() {
-		users = new Usuario[200];
+	public GestorPerUsr() {
+		users = new UsuarioDom[200];
 		nombre=0;
 	}
 	
-	public void addUser2(Usuario u) {
+	public void addUser2(UsuarioDom u) {
 		users[nombre] = u;
 		++nombre;
 	}
 	
-	public boolean isUser2(Usuario u){
+	public boolean isUser2(UsuarioDom u){
 		boolean exist=false;
 		for (int i=0; i<nombre;++i){
 			if ((users[i].getUser().equals(u.getUser())) & 
