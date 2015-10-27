@@ -79,10 +79,5 @@ public class CtrPresHidato {
 		
 		partida.crearPartPers(forma, numCas, numCol, agujeros);
 	}
-	
-	private void configDef(){
-		PartidaDom partida = new PartidaDom();
-		partida.crearPartDef();
-	}
 
 }
