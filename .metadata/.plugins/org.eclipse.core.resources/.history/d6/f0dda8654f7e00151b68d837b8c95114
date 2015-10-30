@@ -1,0 +1,63 @@
+import java.util.Scanner;
+import usuarios.CtrDomUsr;
+
+public class CtrPresUser {
+	
+	private Scanner input;
+	private CtrDomUsr cu;
+	
+	public static final int OP_LOGIN = 1;
+	public static final int OP_REGISTER = 2;
+	public static final int OP_BACK = 3;
+	public static final int OP_LOGOUT = 4;
+	
+	public CtrPresUser() {
+		cu = new CtrDomUsr();
+	}
+	
+	public void setInput(Scanner input) {
+		this.input = input;
+	}
+	
+	public void login() {
+		System.out.println("Login:");
+		System.out.println("Escribe tu nombre de usuario:");
+		String u = input.next();
+
+		System.out.println("Escribe tu password:");
+		String p = input.next();
+		
+		if (cu.isUser1(u, p)==true){
+			System.out.println("Login correcto, por favor, seleccione una opcion");
+		}
+		else {
+			System.out.println("Login incorrecto, por favor, vuelva a introducir sus datos:");
+			login();
+		}
+	}
+	
+	public void register() {
+		System.out.println("Registro:");
+		System.out.println("Escribe tu nombre de usuario:");
+		String u = input.next();
+		System.out.println("Escribe tu password:");
+		String p = input.next();
+		System.out.println("Confirma tu password:");
+		String p2 = input.next();
+		if(p.equals(p2)) {
+			cu.addUser1(u, p);
+		}
+		else {
+			System.out.println("Las password no coinciden, por favor, vuelve a intentarlo:");
+			register();
+		}
+	}
+	
+	public void logout() {
+		input.close();
+	}
+	
+	public void usrs(){
+		
+	}
+}

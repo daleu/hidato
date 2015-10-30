@@ -2,23 +2,26 @@ import java.util.Scanner;
 
 public class Main {
 	
-	public static final int OP_LOGIN = 1;			//Opcions primer menu
-	public static final int OP_REGISTER = 2;
-	public static final int OP_EXIT = 3;
+	//Variables per triar l'opció del menu principal
+	private static final int OP_LOGIN = 1;			
+	private static final int OP_REGISTER = 2;
+	private static final int OP_EXIT = 3;
 	
-	public static final int OP_EDITOR = 1;			//Opcions segon menu
-	public static final int OP_REP = 2;
-	public static final int OP_PARRAP = 3;
-	public static final int OP_RANK = 4;
-	public static final int OP_GESTUS = 5;
-	public static final int OP_MENUANT = 6;
-	public static final int OP_EXT = 7;
+	//Variables per triar l'opció del menu secundari
+	private static final int OP_EDITOR = 1;			
+	private static final int OP_REP = 2;
+	private static final int OP_PARRAP = 3;
+	private static final int OP_RANK = 4;
+	private static final int OP_GESTUS = 5;
+	private static final int OP_MENUANT = 6;
+	private static final int OP_EXT = 7;
 	
-	
+	//Declaracio dels controladors de la capa de presentacio
 	private static CtrPresUser cpu		= new CtrPresUser();
 	private static CtrPresHidato cph	= new CtrPresHidato();
 	private static CtrPresRanquing cpr	= new CtrPresRanquing();
 	
+	//Funcio principal del projecte
 	public static void main(String[] args) {
 		Scanner input 	= new Scanner(System.in);
 		cpu.setInput(input);
@@ -65,7 +68,8 @@ public class Main {
 		}
 	}
 	
-	public static void segonMenu(Scanner input){
+	//Funcio del menu secundari
+	private static void segonMenu(Scanner input){
 		System.out.println("\nOpciones:");
 		System.out.println(OP_EDITOR + ". Editor");
 		System.out.println(OP_REP + ". Repositorio");
@@ -101,7 +105,7 @@ public class Main {
 			break;
 			
 		case OP_GESTUS:
-			System.out.println("Gestionar Cuenat");
+			System.out.println("Gestionar Cuenta");
 			cpu.usrs();
 			break;
 			

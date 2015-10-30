@@ -1,0 +1,72 @@
+package usuarios;
+//import java.util.Vector;
+
+import java.io.BufferedReader;
+
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+
+public class GestorPerUsr {
+	
+	public GestorPerUsr() {
+
+	}
+	
+	public void addUser2(UsuarioDom u){
+		try{
+			FileWriter esc =new FileWriter("Usuarios.txt",true);
+			BufferedWriter bw = new BufferedWriter(esc); 
+			bw.write(u.getUser());
+			bw.newLine();
+			bw.write(u.getPassword());
+			bw.newLine();
+			bw.close();
+			esc.close();
+		}catch(IOException ex){
+			// S'ha de fer encara
+		}
+	}
+	
+	public void isUser2(ArrayList noms, ArrayList pass, boolean cas){
+		try{
+			FileReader fr = new FileReader("Usuarios.txt");
+			BufferedReader bf = new BufferedReader(fr);
+			String nom;
+	        while((nom=bf.readLine())!=null){
+	        	noms.add(nom);
+	        	if (!cas)pass.add(bf.readLine());
+	        	else bf.readLine();
+	        }
+	        bf.close();
+	        fr.close();
+		}catch (IOException ex){
+			// S'ha de fer encara
+		}
+	}
+	
+	public void escriu(ArrayList noms, ArrayList pass){
+		try{
+			FileWriter esc =new FileWriter("Usuarios.txt",false);
+			BufferedWriter bw = new BufferedWriter(esc); 
+			int i=0;
+			String u;
+			String p;
+			while(i<noms.size()){
+				u=(String) noms.get(i);
+				bw.write(u);
+				bw.newLine();
+				p=(String) pass.get(i);
+				bw.write(p);
+				bw.newLine();
+				++i;
+			}
+			bw.close();
+			esc.close();
+		}catch(IOException ex){
+			// S'ha de fer encara
+		}
+	}
+}

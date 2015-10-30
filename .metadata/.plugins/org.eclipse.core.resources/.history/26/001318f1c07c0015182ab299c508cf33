@@ -1,0 +1,55 @@
+package usuarios;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+//import java.util.Vector;
+
+public class GestorPerUsr {
+	
+/*	private UsuarioDom[] users;
+	private int nombre; */
+	
+	public GestorPerUsr() {
+	/*	users = new UsuarioDom[200];
+		nombre=0;*/
+	}
+	
+	public void addUser2(UsuarioDom u) {
+	/*	users[nombre] = u;
+		++nombre;*/
+		FileWriter fichero = null;
+		PrintWriter esc = null;
+		try{
+			fichero = new FileWriter("Usuaris.txt", true);
+			esc = new PrintWriter(fichero);
+			esc.println('*' + u.username);
+			esc.println('/' + u.password);
+			
+		} catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                // Nuevamente aprovechamos el finally para 
+                // asegurarnos que se cierra el fichero.
+                if (null != fichero)
+                   fichero.close();
+                } catch (Exception e2) {
+                   e2.printStackTrace();
+                }
+             }
+		
+	}
+	
+	public boolean isUser2(UsuarioDom u){
+		/*boolean exist=false;
+		for (int i=0; i<nombre;++i){
+			if ((users[i].getUser().equals(u.getUser())) & 
+			(users[i].getPassword().equals(u.getPassword()))) {
+				exist=true;
+			}
+		}*/
+		return true;
+	}
+}

@@ -5,6 +5,7 @@ public class UsuarioDom {
 	String username;
 	String password;
 	
+	/*Constructora*/
 	public UsuarioDom(String u, String p) {
 		this.username = u;
 		this.password = p;
