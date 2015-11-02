@@ -1,0 +1,60 @@
+import java.util.ArrayList;
+
+public class Ranking {
+	
+	private static final int DIF_EAS = 1;
+	private static final int DIF_NOR = 2;
+	private static final int DIF_HAR = 3;
+	
+	private ArrayList<PairIntString> facil;
+	private ArrayList<PairIntString> normal;
+	private ArrayList<PairIntString> dificil;
+	//private ControladorDomini cd = new ControladorDomini();
+	
+	/*Contructores*/
+	
+	public Ranking(){
+		this.facil = new ArrayList<PairIntString>();
+		this.normal = new ArrayList<PairIntString>();
+		this.dificil = new ArrayList<PairIntString>();
+		
+		//this.cd = new ControladorDomini();
+	}
+	
+	/*Consultores*/
+	
+	//dificultat=1 -> easy, dificultat=2 -> normal, dificultat=3 -> dificil
+	public ArrayList<PairIntString> getRank(int dificultat){
+		ArrayList<PairIntString> rank = new ArrayList<PairIntString>();
+		switch (dificultat) {
+		case DIF_EAS:
+			rank = facil.clone();
+		}
+		return rank;
+	}
+	
+	//dificultat=1 -> easy, dificultat=2 -> normal, dificultat=3 -> dificil
+	public ArrayList<Integer> getPos(String user, int dificultat){
+		return null;
+		
+	}
+	
+	//dificultat=1 -> easy, dificultat=2 -> normal, dificultat=3 -> dificil
+	public ArrayList<Integer> getScore(String user, int dificultat){
+		return null;
+	}
+	
+	/*Modificadores*/
+	
+	public void addNewRanking(int dificultat, String user, int score){
+		
+	}
+	
+	public void deleteUserRanking(String user){
+		
+	}
+	
+	public void modifyUsername(String userActual, String userAnterior){
+		
+	}
+}

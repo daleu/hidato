@@ -1,0 +1,5 @@
+package dominio.hidato;
+
+public class CtrDomHidato {
+
+}

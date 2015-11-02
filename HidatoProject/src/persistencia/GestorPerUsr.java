@@ -1,4 +1,4 @@
-package usuarios;
+package persistencia;
 //import java.util.Vector;
 
 import java.io.BufferedReader;
@@ -8,8 +8,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 
+import usuarios.UsuarioDom;
+
+
+//S'ha d'arreglar! es una merda! no se que cony passa!!!!
 public class GestorPerUsr {
 	
 	/*Constructora*/
@@ -42,9 +45,9 @@ public class GestorPerUsr {
 	public boolean comprovarUsr(UsuarioDom u){
 		boolean trobat=false;
 		try{
-			File fichero = new File("usuaris/"+u.getUser()+".txt");
+			File fichero = new File(":usuaris",u.getUser()+".txt");
 			if (fichero.exists()){
-				FileReader fr = new FileReader("usuaris/"+u.getUser()+".txt");
+				FileReader fr = new FileReader(":usuaris/"+u.getUser()+".txt");
 				BufferedReader bf = new BufferedReader(fr);
 				String cont =bf.readLine();
 				bf.close();

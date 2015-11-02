@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 import hidato.PartidaDom;
 
 public class CtrPresHidato {
