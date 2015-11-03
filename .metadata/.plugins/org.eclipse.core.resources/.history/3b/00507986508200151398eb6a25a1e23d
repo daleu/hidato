@@ -1,0 +1,8 @@
+
+public class SolHidato {
+	
+	public void SolHidato(TaulellHidato taulell){
+		
+	}
+	
+}

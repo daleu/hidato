@@ -1,0 +1,41 @@
+import java.io.IOException;
+import java.util.ArrayList;
+
+public class TaulellHidato extends Taulell{
+
+	private int Matriu_solucio [][];
+
+	public TaulellHidato(int tamany) {
+		super(tamany);
+		for (int i=0; i<tamany; ++i){
+			for (int j=0; j<tamany; ++j){
+				Matriu_joc[i][j] = new Casilla();
+			}
+		}
+		candidats = new ArrayList[tamany][tamany];
+	}
+	
+	//Si entrada=false, entra pel driver. Si entrada=true, escriu el client
+	public void modifica_valor (int new_valor, int fila, int columna, boolean entrada) {
+		if (entrada==true) {
+			if (!Matriu_joc[fila][columna].getEditable()){
+	/*			IOException error = new IOException();
+				throw error;*/
+			}
+			else Matriu_joc[fila][columna].setValor(new_valor);	
+		}
+		else {
+			Matriu_joc[fila][columna].setValor(new_valor);
+			Matriu_joc[fila][columna].setEditable(false);
+			Matriu_solucio[fila][columna]=new_valor;
+		}
+	}
+	
+	/*public void intForat (int fila, int columna) {
+		int i=0;
+		Matriu_joc[fila][columna].setValor(i);
+		Matriu_joc[fila][columna].setEditable(false);
+		Matriu_solucio[fila][columna]=i;
+	}
+*/
+}

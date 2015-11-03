@@ -1,6 +1,7 @@
 
+import java.util.Objects;
 
-public class Pair<int,int> {
+public class Pair {
     private int fila;
     private int columna;
 
@@ -11,22 +12,16 @@ public class Pair<int,int> {
     }
 
     public int hashCode() {
-    	int hashfila = fila != null ? fila.hashCode() : 0;
-    	int hashcolumna = columna != null ? columna.hashCode() : 0;
-
-    	return (hashfila + hashcolumna) * hashcolumna + hashfila;
+    	return Objects.hash(fila, columna);
     }
 
     public boolean equals(Object other) {
+    	if(other == this) return true;
+    	
     	if (other instanceof Pair) {
     		Pair otherPair = (Pair) other;
-    		return 
-    		((  this.fila == otherPair.fila ||
-    			( this.fila != null && otherPair.fila != null &&
-    			  this.fila.equals(otherPair.fila))) &&
-    		 (	this.columna == otherPair.columna ||
-    			( this.columna != null && otherPair.columna != null &&
-    			  this.columna.equals(otherPair.columna))) );
+    		
+    		return (Objects.equals(columna, otherPair.columna) && Objects.equals(fila, otherPair.fila));
     	}
 
     	return false;
