@@ -1,0 +1,21 @@
+15:32:20,742 I: (ErlangCore.java:64) : Starting CORE Thread[Worker-6,5,main]
+15:32:20,752 I: (ErlangCore.java:79) : *** starting Erlide v0.29.11.201502161407 (core=0.24.12.201502161407) (model api=0.24.11.201502161407) *** (Cp1252) ui
+15:32:20,782 I: (ErlangCore.java:86) : Started CORE
+15:32:20,782 F: (ErlangPlugin.java:88) : Core started
+15:32:21,264 F: (ErlangHostnameRetriever.java:40) : Test long hostname: a5s109pc21.fib.upc.es
+15:32:21,783 F: (ErlangHostnameRetriever.java:40) : Test short hostname: a5s109pc21
+15:32:21,808 F: (HostnameUtils.java:74) : Detected:: a5s109pc21 && a5s109pc21.fib.upc.es
+15:32:21,860 F: (BackendActivator.java:25) : Backend plugin started
+15:32:21,870 I: (ErlideUIPlugin.java:130) : Starting UI Thread[Worker-6,5,main]
+15:32:21,870 F: (ModelActivator.java:19) : Starting Erlang model api
+15:32:21,904 F: (BackendFactory.java:42) : Create ide backend 17.5.0
+15:32:21,907 F: (BackendFactory.java:56) : Create backend 62bc2_guillermoserrahima_366882_erlide
+15:32:22,012 F: (OtpNodeProxy.java:302) : Runtime 62bc2_guillermoserrahima_366882_erlide@a5s109pc21.fib.upc.es starting
+15:32:22,012 F: (OtpNodeProxy.java:420) : START node :> ["c:\program files\erl6.4/bin/erl", -name, 62bc2_guillermoserrahima_366882_erlide@a5s109pc21.fib.upc.es, -setcookie, erlide] *** F:\windows\eclipse\workspace\hidato44
+15:32:22,032 F: (OtpNodeProxy.java:213) : 62bc2_guillermoserrahima_366882_erlide@a5s109pc21.fib.upc.es: waiting connection to peer... 
+15:32:22,476 F: (OtpNodeProxy.java:220) : connected!
+15:32:22,618 F: (OtpNodeProxy.java:307) : Runtime 62bc2_guillermoserrahima_366882_erlide@a5s109pc21.fib.upc.es running
+15:32:22,740 F: (LogEventHandler.java:27) : info: {"Monitoring java node",'jerlide_d366906@a5s109pc21.fib.upc.es'}
+15:32:22,750 F: (LogEventHandler.java:27) : info: {"Start monitor process: ",10000000,50000000}
+15:32:23,170 F: (ModelActivator.java:30) : Started model api
+15:32:23,170 I: (ErlideUIPlugin.java:152) : Started UI

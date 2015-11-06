@@ -43,6 +43,39 @@ public class Ranking {
 		ArrayList<Integer> ap = new ArrayList<Integer>();
 		ListIterator<PairIntString> it;
 		PairIntString pis;
+		int i = 0;
+		
+		switch (dificultat) {
+		case DIF_EAS:
+			it = facil.listIterator();
+			while (it.hasNext()) {
+				pis = it.next();
+				if (pis.getSecond().equals(user)) ap.add(i);
+				++i;
+			}
+		case DIF_NOR:
+			it = normal.listIterator();
+			while (it.hasNext()) {
+				pis = it.next();
+				if (pis.getSecond().equals(user)) ap.add(i);
+				++i;
+			}
+		case DIF_HAR:
+			it = dificil.listIterator();
+			while (it.hasNext()) {
+				pis = it.next();
+				if (pis.getSecond().equals(user)) ap.add(i);
+				++i;
+			}
+		}
+		return ap;
+	}
+	
+	//dificultat=1 -> easy, dificultat=2 -> normal, dificultat=3 -> dificil
+	public ArrayList<Integer> getScore(String user, int dificultat) {
+		ArrayList<Integer> ap = new ArrayList<Integer>();
+		ListIterator<PairIntString> it;
+		PairIntString pis;
 		
 		switch (dificultat) {
 		case DIF_EAS:
@@ -54,29 +87,107 @@ public class Ranking {
 				}
 			}
 		case DIF_NOR:
-			return (ArrayList<PairIntString>) normal.clone();
+			it = normal.listIterator();
+			while (it.hasNext()) {
+				pis = it.next();
+				if (pis.getSecond().equals(user)) {
+					ap.add(pis.getFirst());
+				}
+			}
 		case DIF_HAR:
-			return (ArrayList<PairIntString>) dificil.clone();
+			it = dificil.listIterator();
+			while (it.hasNext()) {
+				pis = it.next();
+				if (pis.getSecond().equals(user)) {
+					ap.add(pis.getFirst());
+				}
+			}
 		}
-		return null;
-	}
-	
-	//dificultat=1 -> easy, dificultat=2 -> normal, dificultat=3 -> dificil
-	public ArrayList<Integer> getScore(String user, int dificultat) {
-		return null;
+		return ap;
 	}
 	
 	/*Modificadores*/
 	
-	public void addNewRanking(int dificultat, String user, int score) {
+	public void addNewRanking(int dificultat, int score, String user) {
+		ListIterator<PairIntString> it = null;
+		PairIntString pis, newPis;
+		boolean inserted = false;
+		newPis = new PairIntString(score, user);
+		
+		switch (dificultat) {
+			case DIF_EAS:
+				it = facil.listIterator();
+				
+			case DIF_NOR:
+				it = normal.listIterator();
+				
+			case DIF_HAR:
+				it = dificil.listIterator();
+				
+		}
+		
+		while (it.hasNext() && !inserted) {
+			pis = it.next();
+			if (pis.getFirst() > score) {
+				it.previous();
+				it.add(newPis);				// it.add(newPis) anade newPis justo
+											// antes de it.next(), que seria despues
+											// de pis. Y como lo queremos just antes,
+											// llamo a it.previous() para que it.next()
+											// sea el que corresponde al actual
+											// valor de pis. Despues de esto no hace
+											//volver a donde estabamos con it.next()
+											// porque ponemos inserted = true
+				inserted = true;
+			}
+			
+		}
 		
 	}
 	
 	public void deleteUserRanking(String user) {
+		ListIterator<PairIntString> it;
 		
+		it = facil.listIterator();
+		while (it.hasNext()) {
+			if (it.next().getSecond().equals(user)) it.remove();
+		}
+	
+		it = normal.listIterator();
+		while (it.hasNext()) {
+			if (it.next().getSecond().equals(user)) it.remove();
+		}
+		
+		it = dificil.listIterator();
+		while (it.hasNext()) {
+			if (it.next().getSecond().equals(user)) it.remove();
+		}
+											// it.remove() quita el ultimo elemento
+											// llamado con it.next() o it.previous(),
+											// es decir, el que llamamos al hacer la
+											// comprobacion del if
 	}
 	
 	public void modifyUsername(String userActual, String userAnterior) {
+		ListIterator<PairIntString> it;
+		PairIntString pis;
 		
+		it = facil.listIterator();
+		while (it.hasNext()) {
+			pis = it.next();
+			if (pis.getSecond().equals(userAnterior)) pis.setSecond(userActual);
+		}
+	
+		it = normal.listIterator();
+		while (it.hasNext()) {
+			pis = it.next();
+			if (pis.getSecond().equals(userAnterior)) pis.setSecond(userActual);
+		}
+		
+		it = dificil.listIterator();
+		while (it.hasNext()) {
+			pis = it.next();
+			if (pis.getSecond().equals(userAnterior)) pis.setSecond(userActual);
+		}
 	}
 }
