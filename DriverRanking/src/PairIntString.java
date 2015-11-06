@@ -3,13 +3,17 @@
 public class PairIntString {
 	   private Integer puntuacio;
 	   private String usuari;
-	
-	
+	   
+	   public PairIntString(){
+		   this.puntuacio = 0;
+		   this.usuari = "";
+	   }
+	   
 	   public PairIntString(Integer puntuacio, String usuari){
 	     this.puntuacio = puntuacio;
 	     this.usuari = usuari;
 	   }
-	
+	   
 	   public void setFirst(Integer puntuacio){
 	    this.puntuacio = puntuacio;
 	   }

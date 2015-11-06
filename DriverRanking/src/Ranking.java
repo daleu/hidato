@@ -42,30 +42,22 @@ public class Ranking {
 	public ArrayList<Integer> getPos(String user, int dificultat) {
 		ArrayList<Integer> ap = new ArrayList<Integer>();
 		ListIterator<PairIntString> it;
-		PairIntString pis;
-		int i = 0;
 		
 		switch (dificultat) {
 		case DIF_EAS:
 			it = facil.listIterator();
 			while (it.hasNext()) {
-				pis = it.next();
-				if (pis.getSecond().equals(user)) ap.add(i);
-				++i;
+				if (it.next().getSecond().equals(user)) ap.add(it.previousIndex());
 			}
 		case DIF_NOR:
 			it = normal.listIterator();
 			while (it.hasNext()) {
-				pis = it.next();
-				if (pis.getSecond().equals(user)) ap.add(i);
-				++i;
+				if (it.next().getSecond().equals(user)) ap.add(it.previousIndex());
 			}
 		case DIF_HAR:
 			it = dificil.listIterator();
 			while (it.hasNext()) {
-				pis = it.next();
-				if (pis.getSecond().equals(user)) ap.add(i);
-				++i;
+				if (it.next().getSecond().equals(user)) ap.add(it.previousIndex());
 			}
 		}
 		return ap;
