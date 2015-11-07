@@ -40,7 +40,7 @@ public class DriverRanking {
 	}
 	
 	///////////////////////////-------------MAIN-------------///////////////////////////
-
+	// MAIN DANI
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		//cpu.setInput(input);
