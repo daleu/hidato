@@ -1,0 +1,40 @@
+
+import java.util.Timer;
+import java.util.TimerTask;
+
+public class Contador {
+	private int segundos;
+	private Timer cronometro;
+	private boolean countdown;
+	
+	private class Segundera extends TimerTask {
+		public void run() {
+			if(!countdown) segundos++;
+			else segundos--;
+		}
+	}
+	
+	public Contador() {
+		segundos = 0;
+		cronometro = new Timer();
+		countdown = false;
+	}
+	
+	public Contador(int s) {
+		segundos = s;
+		cronometro = new Timer();
+		countdown = true;
+	}
+	
+	public Contador(int m, int s) {
+		this.Contador(m*60 + s);
+	}
+	
+	public void Iniciar() {
+		cronometro.schedule(new Segundera(), segundos, 1000);
+	}
+	
+	public void Detener() {
+		cronometro.cancel();
+	}
+}
