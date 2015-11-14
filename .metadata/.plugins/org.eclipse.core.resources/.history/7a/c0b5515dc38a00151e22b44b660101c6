@@ -8,12 +8,9 @@ public class Contador {
 	private boolean countdown;
 	
 	private class Segundera extends TimerTask {
-		
 		public void run() {
 			if(!countdown) segundos++;
 			else segundos--;
-			
-			if(segundos==0) detener();
 		}
 	}
 	

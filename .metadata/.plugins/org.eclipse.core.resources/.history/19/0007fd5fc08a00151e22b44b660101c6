@@ -8,12 +8,9 @@ public class Contador {
 	private boolean countdown;
 	
 	private class Segundera extends TimerTask {
-		
 		public void run() {
 			if(!countdown) segundos++;
 			else segundos--;
-			
-			if(segundos==0) detener();
 		}
 	}
 	
@@ -37,11 +34,11 @@ public class Contador {
 		this(h*3600 + m*60 + s);
 	}
 	
-	public void iniciar() {
+	public void Iniciar() {
 		cronometro.schedule(new Segundera(), segundos, 1000);
 	}
 	
-	public void detener() {
+	public void Detener() {
 		cronometro.cancel();
 	}
 	

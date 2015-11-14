@@ -3,9 +3,10 @@ import java.util.Scanner;
 public class DriverTimer {
 	
 	private static final int OP_CONF = 1;
-	private static final int OP_SHOW = 2;
-    private static final int OP_STOP = 3;
-    private static final int OP_EXIT = 4;
+	private static final int OP_START = 2;
+	private static final int OP_SHOW = 3;
+    private static final int OP_STOP = 4;
+    private static final int OP_EXIT = 5;
     
     private static Contador menuNewContador(Scanner input) {
     	boolean b = true;
@@ -23,8 +24,6 @@ public class DriverTimer {
     	
     	if(valor > 0) c = new Contador(valor);
     	else c = new Contador();
-    	
-    	c.iniciar();
     	
     	return c;
     }
@@ -50,6 +49,7 @@ public class DriverTimer {
         while(b) {
             System.out.println("\nOpciones:");
             System.out.println(OP_CONF + ". Configurar un nuevo contador");
+            System.out.println(OP_START + ". Re/iniciar el contador");
             System.out.println(OP_SHOW + ". Mostrar los segundos");
             System.out.println(OP_STOP + ". Detener el contador");
             System.out.println(OP_EXIT + ". Salir");
@@ -65,6 +65,10 @@ public class DriverTimer {
                 c = menuNewContador(input);
                 break;
                 
+            case OP_START:
+            	c.iniciar();
+            	break;
+            
             case OP_SHOW:
                 menuShowSec(input, c);
                 break;

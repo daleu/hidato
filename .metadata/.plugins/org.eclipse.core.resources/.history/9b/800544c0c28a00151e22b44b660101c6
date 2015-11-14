@@ -76,6 +76,7 @@ public class DriverTimer {
             case OP_EXIT:
                 System.out.println("Cerrando...");
                 input.close();
+                op = 0;
                 b = false;
                 break;
             
