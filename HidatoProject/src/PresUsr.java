@@ -1,10 +1,10 @@
 import java.util.Scanner;
-import usuarios.CtrDomUsr;
+import usuarios.CtrlUsr;
 
 public class PresUsr {
 	
 	private Scanner input;
-	private CtrDomUsr cu;
+	private CtrlUsr cu;
 	
 	//Opcions del menu de gestio d'usuaris
 	public static final int OP_MODUS = 1;
@@ -14,7 +14,7 @@ public class PresUsr {
 	
 	/*Constructor*/
 	public PresUsr() {
-		cu = new CtrDomUsr();
+		cu = new CtrlUsr();
 	}
 	
 	/*Modificadores|voids*/
