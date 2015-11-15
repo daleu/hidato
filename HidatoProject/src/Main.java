@@ -17,9 +17,9 @@ public class Main {
 	private static final int OP_EXT = 7;
 	
 	//Declaracio dels controladors de la capa de presentacio
-	private static CtrPresUser cpu		= new CtrPresUser();
-	private static CtrPresHidato cph	= new CtrPresHidato();
-	private static CtrPresRanquing cpr	= new CtrPresRanquing();
+	private static PresUsr cpu		= new PresUsr();
+	private static PresHidato cph	= new PresHidato();
+	private static PresRanquing cpr	= new PresRanquing();
 	
 	//Funcio principal del projecte
 	public static void main(String[] args) {

@@ -1,0 +1,17 @@
+package dominio;
+
+
+import usuarios.Usuario;
+
+public class ControladorDomini {
+	
+	private Usuario current;
+	
+	public void actUsuari(Usuario u){
+		current=u;
+	}
+	
+	public Usuario getUsr(){
+		return current;
+	}
+}

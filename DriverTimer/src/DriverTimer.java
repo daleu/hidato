@@ -21,7 +21,7 @@ public class DriverTimer {
         	else b = false;
     	}
     	
-    	if(valor > 0) c = new Contador(valor);
+    	if(valor > 0) c = new Contador(valor, true);
     	else c = new Contador();
     	
     	c.iniciar();

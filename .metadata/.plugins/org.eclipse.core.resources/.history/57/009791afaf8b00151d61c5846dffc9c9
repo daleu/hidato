@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+public class DriverGenerador {
+	
+	public static void main(String[] args) {
+    	System.out.println("Introduzca las medidas del tablero (alzada y ancho):");
+    	Scanner in = new Scanner(System.in);
+    	int alzada = in.nextInt();
+    	
+    	TaulellHidato aux = new TaulellHidato(alzada);
+    	
+    	System.out.println("Introduzca el nombre de agujeros:");
+    	int forats = in.nextInt();
+    	
+    	System.out.println("Introduzca el numero de nombres Fijos:");
+    	int nombresFixos = in.nextInt();
+        
+    	in.close();
+    	
+    	aux.crearTaulellRandom(forats,nombresFixos);
+    	
+    	System.out.println("\nSolucio:");
+    	CtrlJoc.printBoard(aux.agafaSolucio());
+        
+    }
+}

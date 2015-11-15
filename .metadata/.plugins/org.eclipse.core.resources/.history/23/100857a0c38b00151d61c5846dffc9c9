@@ -1,0 +1,54 @@
+package usuarios;
+
+import java.util.ArrayList;
+
+public class CtrDomUsr {
+	
+	private Usuario current;
+	private GestorPerUsr gu;
+	
+	/*Constructora*/
+	public CtrDomUsr() {
+		gu = new GestorPerUsr();
+	}
+	
+	//Afegim un nou Usuari
+	public boolean afegirUsuari(String u, String p) {
+		boolean afegit = false;
+		current = new Usuario(u, p);
+		afegit=gu.afegirUsuari(current);
+		return afegit;
+	}
+	
+	//Quan passem false comprovem password i nom d'usuari.
+	//Quan passem true comprovarem el noms d'usuari.
+	public boolean logUsuari(String u, String p){
+		boolean loguejat = false;
+		Usuario newCurrent = new Usuario(u, p);
+		loguejat=gu.comprovarUsr(newCurrent);
+		if (loguejat) current = newCurrent;
+		return loguejat;
+	}
+	
+	//Ens modifica el nostre nom d'usuari
+	public boolean modUsr(String uact, String unou){
+		boolean fet = false;
+		if (uact.equals(current.getUsr())){
+			Usuario newCurrent = new Usuario(unou, newCurrent.getPassword());
+			fet=gu.modUsr(uact, unou, newCurrent.getPassword());
+			if (fet) current = newCurrent;
+		}
+		return fet;
+	}
+	
+	//Modifica la nostra password
+	public boolean modPass(String pact, String pnov){
+		boolean fet = false;
+		if (pact.equals(current.getPassword())){
+			Usuario newCurrent = new Usuario(current.getUsr(), pnov);
+			fet=gu.modPassword(newCurrent.getUsr(), pnov);
+			if (fet) current = newCurrent;
+		}
+		return fet;
+	}
+}

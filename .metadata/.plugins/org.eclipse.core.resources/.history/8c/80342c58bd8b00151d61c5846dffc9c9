@@ -1,0 +1,117 @@
+import java.util.Random;
+
+public class ControladorJocOld {
+ 
+    public boolean solucionador(int r, int c, int n, int next, int[] given, int[][] Matriu_solucio) {
+        if (n > given[given.length - 1])
+            return true;
+ 
+        if (Matriu_solucio[r][c] != 0 && Matriu_solucio[r][c] != n)
+            return false;
+ 
+        if (Matriu_solucio[r][c] == 0 && given[next] == n)
+            return false;
+ 
+        int back = Matriu_solucio[r][c];
+        if (back == n)
+            next++;
+     
+        Matriu_solucio[r][c] = n;
+        for (int i = -1; i < 2; i++)
+            for (int j = -1; j < 2; j++)
+                if (solucionador(r + i, c + j, n + 1, next, given, Matriu_solucio))
+                    return true;
+ 
+        Matriu_solucio[r][c] = back;
+        return false;
+    }
+    
+    public void generador(int forats, int nombreFixos, int mida, Casilla[][] Matriu_joc){
+
+    	Random val = new Random();
+
+    	int max = mida*mida-forats;
+    	
+    	int fila = val.nextInt(mida-1);
+    	int columna = val.nextInt(mida-1);
+    	
+    	Matriu_joc[fila][columna].setFila(fila);
+		Matriu_joc[fila][columna].setColumna(columna);
+		Matriu_joc[fila][columna].setEditable(false);
+		Matriu_joc[fila][columna].setValor(1);
+    	
+		boolean[][] vist = new boolean[mida][mida];
+		for (int i=0;i<mida;++i){
+			for (int j=0; j<mida; ++j){
+				vist[i][j]=false;
+			}
+		}
+		
+		vist[fila][columna]=true;
+		
+    	posAl(val, 2, max, fila, columna, Matriu_joc, vist);
+    	
+    	for (int i=0; i<mida; ++i){
+    		for (int j=0; j<mida; ++j){
+    			if (Matriu_joc[i][j].getValor()==0){
+    				Matriu_joc[fila][columna].setFila(fila);
+    				Matriu_joc[fila][columna].setColumna(columna);
+    				Matriu_joc[fila][columna].setEditable(false);
+    				Matriu_joc[fila][columna].setValor(-1);
+    			}
+    		}
+    	}
+    	
+    	for (int j=2; j<nombreFixos; ++j){
+    		setEd(val,Matriu_joc, mida);
+    	}
+    	
+    	for (int x=0; x<mida; ++x){
+    		for (int y=0; y<mida; ++y){
+    			if(Matriu_joc[x][y].getEditable())Matriu_joc[x][y].setValor(0);
+    		}
+    	}
+    	
+    
+    }
+    
+    private void setEd(Random val, Casilla[][] Matriu_joc,int mida){
+    	int fila=val.nextInt(mida-1);
+		int columna=val.nextInt(mida-1);
+		if (Matriu_joc[fila][columna].getValor()!=-1 & Matriu_joc[fila][columna].getEditable()){
+			Matriu_joc[fila][columna].setEditable(false);
+		}
+		else setEd(val,Matriu_joc,mida);
+    }
+    
+    private void posAl(Random val, int r, int max, int fila, int columna, Casilla[][] Matriu_joc, boolean[][] vist){
+    	if(r!=max){
+	    	int filaaux=val.nextInt(2)-1;
+			int columnaaux=val.nextInt(2)-1;
+			fila = fila + filaaux;
+			columna = columna + columnaaux;
+			if (fila>=Matriu_joc.length || columna>=Matriu_joc[0].length || fila<0 || columna<0){
+				fila = fila - filaaux;
+				columna = columna - columnaaux;
+				posAl(val, r, max, fila, columna, Matriu_joc, vist);
+			}
+			else{
+				if (vist[fila][columna]==false){
+					vist[fila][columna]=true;
+					Matriu_joc[fila][columna].setFila(fila);
+					Matriu_joc[fila][columna].setColumna(columna);
+					Matriu_joc[fila][columna].setValor(r);
+					if (r==max) Matriu_joc[fila][columna].setEditable(false);
+					else Matriu_joc[fila][columna].setEditable(true);
+					posAl(val, r+1, max, fila, columna, Matriu_joc, vist);
+					vist[fila][columna]=false;
+				}
+				else {
+					fila = fila - filaaux;
+					columna = columna - columnaaux;
+					posAl(val, r, max, fila, columna, Matriu_joc, vist);
+				}
+			}
+    	}
+    }
+}

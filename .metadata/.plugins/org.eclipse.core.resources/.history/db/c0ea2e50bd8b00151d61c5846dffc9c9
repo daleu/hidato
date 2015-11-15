@@ -1,0 +1,163 @@
+import java.util.Random;
+
+public class ControladorJoc2 {
+	private Pair[] adjacent = new Pair[8];
+	
+	public void generador(int forats, int nombreFixos, int mida, int[][] mj, boolean[][] fixes){
+		
+    	int max = mida*mida-forats;
+    	
+    	Random aux = new Random();
+    	int fila = aux.nextInt(mida);
+    	int columna = aux.nextInt(mida);
+    	
+    	mj[fila][columna]= 1;
+		fixes[fila][columna]= false;
+		
+		System.out.println("fila/columna num1 " + fila + " " + columna);
+		
+		adjacent[0] = new Pair(-1,-1);
+		adjacent[1] = new Pair(-1, 0);
+		adjacent[2] = new Pair(-1,+1);
+		adjacent[3] = new Pair( 0,-1);
+		adjacent[4] = new Pair( 0,+1);
+		adjacent[5] = new Pair(+1,-1);
+		adjacent[6] = new Pair(+1, 0);
+		adjacent[7] = new Pair(+1,+1); ///TOPE
+		
+		Random r = new Random();
+		
+		posAl(1, fila, columna, max, mj, fixes, r);
+		
+		ompleForatsRec(mj, fixes, forats, r);
+		
+		fixarNombresRec(mj, fixes, nombreFixos, r);
+    }
+	
+	public boolean posAl(int val, int f, int c, int max, int[][] mj, boolean[][] fixes, Random r) {
+		int auxF, auxC;
+		boolean trobat = false;
+		
+		mj[f][c] = val;
+		if(val == max) {
+			trobat = true;
+			fixes[f][c] = false;
+		}
+		
+		int n = 0;
+		if(r.nextInt(100) < 35) n = r.nextInt(8);
+		
+		//System.out.println( "adjacent: " + n );
+		for(int i = 0; i < 8 && !trobat; ++i) {
+			printBoard(mj);
+			System.out.println("\n");
+			
+			auxF = f + adjacent[(n+i)%8].getFila();
+			auxC = c + adjacent[(n+i)%8].getColumna();
+			//System.out.println( "adjacent: " + ((n+i)%8) + "; (" + auxF + "," + auxC + ") " + (val+1) + " - " + i );
+			if(auxF>=0 && auxF<mj.length && auxC>=0 && auxC<mj[0].length &&
+					fixes[auxF][auxC] &&
+					mj[auxF][auxC] == 0){
+				trobat = posAl( val+1, auxF, auxC, max, mj, fixes, r);
+				//System.out.println("hem entrat"); //"hem entrat en " + "(" + auxF + "," + auxC + ")" 
+			}
+		}
+		if(!trobat) mj[f][c] = 0;
+		
+		return trobat;
+	}
+	
+	public void ompleForats(int[][] mj, boolean[][] fixes, int forats) {
+		
+		for(int i = 0; i < mj.length; i++) {
+			for(int j = 0; j < mj[0].length; j++) {
+				if(mj[i][j] == 0) {
+					mj[i][j] = -1;
+					fixes[i][j] = false;
+				}
+			}
+		}
+	}
+	
+	public void ompleForatsRec(int[][] mj, boolean[][] fixes, int forats, Random r) {
+		if (forats!=0){
+			
+			int i = r.nextInt(mj.length);
+			int j = r.nextInt(mj.length);
+			if (fixes[i][j]){
+				mj[i][j] = -1;
+				fixes[i][j]=false;
+				ompleForatsRec(mj,fixes,forats-1, r);
+			}
+			else ompleForatsRec(mj,fixes,forats, r);
+		}
+	}
+	
+	public void fixarNombres(int[][] mj, boolean[][] fixes, int nf) {
+		int i = 0;
+		int j = 0;
+		int k = 0;
+		while(k < nf) {
+			if(Math.random()*100 < 40) {
+				k++;
+				fixes[i][j] = false;
+			}
+			
+			j++;
+			if(j >= mj[0].length) i++;
+			
+			i = i%mj.length;
+			j = j%mj[0].length;
+		}
+	}
+	
+	public void fixarNombresRec(int[][] mj, boolean[][] fixes, int nf, Random r) {
+		
+		if (nf!=0){
+			
+			int i = r.nextInt(mj.length);
+			int j = r.nextInt(mj.length);
+			if (fixes[i][j]){
+				fixes[i][j] = false;
+				fixarNombresRec(mj,fixes,nf-1, r);
+			}
+			else fixarNombresRec(mj,fixes,nf, r);
+		}
+	}
+	
+	public boolean solucionador(int r, int c, int n, int next, int[] given, int[][] Matriu_solucio) {
+        if (n > given[given.length - 1])
+            return true;
+ 
+        if (Matriu_solucio[r][c] != 0 && Matriu_solucio[r][c] != n)
+            return false;
+ 
+        if (Matriu_solucio[r][c] == 0 && given[next] == n)
+            return false;
+ 
+        int back = Matriu_solucio[r][c];
+        if (back == n)
+            next++;
+     
+        Matriu_solucio[r][c] = n;
+        for (int i = -1; i < 2; i++)
+            for (int j = -1; j < 2; j++)
+                if (solucionador(r + i, c + j, n + 1, next, given, Matriu_solucio))
+                    return true;
+ 
+        Matriu_solucio[r][c] = back;
+        return false;
+    }
+    
+	private static void printBoard(int[][] Solucio) {
+        for (int[] row : Solucio) {
+            for (int c : row) {
+                if (c == -1)
+                    System.out.print("  . ");
+                else
+                    System.out.printf(c > 0 ? "%3d " : "___ ", c);
+            }
+            System.out.println();
+        }
+    }
+}

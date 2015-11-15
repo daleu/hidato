@@ -1,4 +1,7 @@
+DriverGenerador/bin/
+DriverPartida/bin/
 DriverRanking/bin/
-DriverSolucioHidato/bin/
+DriverSolucionador/bin/
 DriverTimer/bin/
 HidatoProject/bin/
+RemoteSystemsTempFiles/

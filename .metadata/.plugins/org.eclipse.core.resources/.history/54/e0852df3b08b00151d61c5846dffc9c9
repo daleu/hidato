@@ -1,0 +1,41 @@
+import java.util.Scanner;
+
+public class DriverGenerador {
+	
+	public static void main(String[] args) {
+		boolean b = false;
+		Scanner in = new Scanner(System.in);
+		TaulellHidato aux;
+		int alzada, forats, nombresFixos;
+		alzada = forats = nombresFixos = 0;
+		
+		while(!b) {
+			
+			System.out.println("Introduzca las medidas del tablero (alzada y ancho):");
+	    	
+	    	alzada = in.nextInt();
+	    	
+	    	System.out.println("Introduzca el nombre de agujeros:");
+	    	forats = in.nextInt();
+	    	
+	    	System.out.println("Introduzca el numero de nombres Fijos:");
+	    	nombresFixos = in.nextInt();
+	    	
+	    	b = (alzada*alzada - forats < 100 && alzada*alzada - forats >= 2);
+	    	if(!b) {
+	    		System.out.println("Hidato de dimensiones incorrectas.");
+	    		System.out.println("Por favor, intente sugerir un Hidato");
+	    		System.out.println("con al menos 2 numeros y menos de 100.");
+	    	}
+		}
+		aux = new TaulellHidato(alzada);
+    	
+    	in.close();
+    	
+    	aux.crearTaulellRandom(forats,nombresFixos);
+    	
+    	System.out.println("\nSolucio:");
+    	CtrlJoc.printBoard(aux.agafaSolucio());
+        
+    }
+}

@@ -1,26 +1,19 @@
 package usuarios;
 
-import java.util.ArrayList;
-
-import dominio.ControladorDomini;
-import persistencia.GestorPerUsr;
-
 public class CtrDomUsr {
 	
-	private UsuarioDom current;
+	private Usuario current;
 	private GestorPerUsr gu;
-	private ControladorDomini cd;
 	
 	/*Constructora*/
 	public CtrDomUsr() {
 		gu = new GestorPerUsr();
-		cd = new ControladorDomini();
 	}
 	
 	//Afegim un nou Usuari
 	public boolean afegirUsuari(String u, String p) {
 		boolean afegit = false;
-		current = new UsuarioDom(u, p);
+		current = new Usuario(u, p);
 		afegit=gu.afegirUsuari(current);
 		return afegit;
 	}
@@ -29,19 +22,19 @@ public class CtrDomUsr {
 	//Quan passem true comprovarem el noms d'usuari.
 	public boolean logUsuari(String u, String p){
 		boolean loguejat = false;
-		current = new UsuarioDom(u, p);
-		loguejat=gu.comprovarUsr(current);
-		if (loguejat) cd.actUsuari(current);
+		Usuario newCurrent = new Usuario(u, p);
+		loguejat=gu.comprovarUsr(newCurrent);
+		if (loguejat) current = newCurrent;
 		return loguejat;
 	}
 	
 	//Ens modifica el nostre nom d'usuari
-	public boolean modUser(String uact, String unou){
+	public boolean modUsr(String uact, String unou){
 		boolean fet = false;
-		if (uact.equals(cd.getUsr().getUser())){
-			current = new UsuarioDom(unou, cd.getUsr().getPassword());
-			fet=gu.modUsuari(uact, unou, cd.getUsr().getPassword());
-			if (fet) cd.actUsuari(current);
+		if (uact.equals(current.getUsr())){
+			Usuario newCurrent = new Usuario(unou, current.getPass());
+			fet=gu.modUsr(uact, unou, newCurrent.getPass());
+			if (fet) current = newCurrent;
 		}
 		return fet;
 	}
@@ -49,10 +42,10 @@ public class CtrDomUsr {
 	//Modifica la nostra password
 	public boolean modPass(String pact, String pnov){
 		boolean fet = false;
-		if (pact.equals(cd.getUsr().getPassword())){
-			current = new UsuarioDom(cd.getUsr().getUser(), pnov);
-			fet=gu.modPassword(cd.getUsr().getUser(), pnov);
-			if (fet) cd.actUsuari(current);
+		if (pact.equals(current.getPass())){
+			Usuario newCurrent = new Usuario(current.getUsr(), pnov);
+			fet=gu.modPassword(newCurrent.getUsr(), pnov);
+			if (fet) current = newCurrent;
 		}
 		return fet;
 	}
