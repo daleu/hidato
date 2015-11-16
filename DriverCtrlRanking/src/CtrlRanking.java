@@ -53,15 +53,22 @@ public class CtrlRanking {
 			aux = itScore.next();
 			s += aux + "\n"; //"pos,score<salto-de-linea>"
 		}
+		s += ".";	//indica final de string
 		
 		return s;
 	}
 	
 	public void deleteUsrRanking(String usr) {
 		r.deleteUsrRanking(usr);
+		
+		GestorRanking gr = new GestorRanking();
+		gr.store(r);
 	}
 	
 	public void modifyUsr(String newName, String oldName) {
 		r.modifyUsr(newName, oldName);
+		
+		GestorRanking gr = new GestorRanking();
+		gr.store(r);
 	}
 }
