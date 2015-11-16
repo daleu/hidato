@@ -1,0 +1,11 @@
+
+public class GestorRanking {
+	
+	public GestorRanking() {
+		
+	}
+	
+	public void store(Ranking r) {
+		
+	}
+}

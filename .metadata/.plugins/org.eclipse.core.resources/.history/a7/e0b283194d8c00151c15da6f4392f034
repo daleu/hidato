@@ -1,0 +1,33 @@
+import java.util.ArrayList;
+import java.util.ListIterator;
+
+public class CtrlRanking {
+	
+	Ranking r;
+
+	public CtrlRanking() {
+		GestorRanking gr = new GestorRanking();
+		Ranking r = gr.load();
+	}
+	
+	public void saveScore(int dif, int score, String usr) {
+		r.addNewRanking(dif, score, usr);
+		
+		GestorRanking gr = new GestorRanking();
+		gr.store(r);
+	}
+	
+	public String getRank(int dif) {
+		ArrayList<PairIntString> rank = r.getRank(dif);
+		ListIterator<PairIntString> it = rank.listIterator();
+		String s = "";
+		PairIntString aux = null;
+		while(it.hasNext()) {
+			aux = it.next();
+			s += aux.getFirst() + ";" + aux.getSecond() + "\n"; // "score;usuario<salto-de-linea>"
+		}
+		s += ".";
+		
+		return s;
+	}
+}

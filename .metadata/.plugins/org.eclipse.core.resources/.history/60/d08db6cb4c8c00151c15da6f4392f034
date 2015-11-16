@@ -1,0 +1,23 @@
+
+public class CtrlRanking {
+	
+	Ranking r;
+
+	public CtrlRanking() {
+		GestorRanking gr = new GestorRanking();
+		Ranking r = gr.load();
+	}
+	
+	public void saveScore(int dif, int score, String usr) {
+		r.addNewRanking(dif, score, usr);
+		
+		GestorRanking gr = new GestorRanking();
+		gr.store(r);
+	}
+	
+	public void getRank(int dif) {
+		GestorRanking gr = new GestorRanking();
+		Ranking r = gr.load();
+		
+	}
+}

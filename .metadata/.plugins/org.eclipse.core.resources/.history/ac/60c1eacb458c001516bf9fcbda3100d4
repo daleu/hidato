@@ -1,0 +1,11 @@
+
+public class CtrlRanking {
+
+	public CtrlRanking() {
+		
+	}
+	
+	public void saveScore() {
+		
+	}
+}
