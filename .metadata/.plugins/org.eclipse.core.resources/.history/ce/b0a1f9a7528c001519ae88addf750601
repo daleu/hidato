@@ -13,11 +13,11 @@ public class DriverCtrlRanking {
     private static CtrlRanking cr;
     
     private static void menuNewScore(Scanner input) {
-        int score = -1;
+        int score = 0;
         int dif = 0;
         String usr;
         
-        while(score < 0) {
+        while(score <= 0) {
             System.out.println("Introduzca la puntuacion:");
             if(input.hasNextInt()) score = input.nextInt();
             if(score < 0) System.out.println("Esa no es una puntuacion valida.");
@@ -44,7 +44,7 @@ public class DriverCtrlRanking {
          System.out.println("Introduce una cifra valida");
          menuShowRank(input);
         }
-        else System.out.println(cr.getRank(rankget));
+        else cr.getRank(rankget);
     }
     
     private static void menuChangeUsr(Scanner input) {
