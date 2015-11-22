@@ -1,3 +1,4 @@
+package score;
 public class GestorRanking {
 	
 	public GestorRanking() {

@@ -6,9 +6,8 @@ public class DriverCtrlRanking {
     private static final int OP_SHOW = 2;
     private static final int OP_CHANGE = 3;
     private static final int OP_DEL = 4;
-    private static final int OP_POS = 5;
-    private static final int OP_GETSCORE = 6;
-    private static final int OP_EXIT = 7;
+    private static final int OP_GETSCORE = 5;
+    private static final int OP_EXIT = 6;
     
     private static CtrlRanking cr;
     
@@ -17,21 +16,26 @@ public class DriverCtrlRanking {
         int dif = 0;
         String usr;
         
-        while(score < 0) {
-            System.out.println("Introduzca la puntuacion:");
-            if(input.hasNextInt()) score = input.nextInt();
-            if(score < 0) System.out.println("Esa no es una puntuacion valida.");
+        System.out.println("Introduzca la puntuacion:");
+        if(input.hasNextInt()) score = input.nextInt();
+        if(score < 0) {
+        	System.out.println("Esa no es una puntuacion valida.");
         }
-        
-        System.out.println("Introduzca el nombre del usuario que la ha obtenido:");
-        usr = input.next();
-        while(dif < 1 || dif > 3) {
-            System.out.println("Introduzca la dificultad:");
+        else {
+        	System.out.println("Introduzca el nombre del usuario que la ha obtenido:");
+            usr = input.next();
+            System.out.println("Selecciona la dificultad:");
+            System.out.println("1. Facil");
+            System.out.println("2. Normal");
+            System.out.println("3. Dificil");
             if(input.hasNextInt()) dif = input.nextInt();
-            if(dif < 1 || dif > 3) System.out.println("Esa no es una dificultad valida.");
+            if(dif < 1 || dif > 3) {
+            	System.out.println("Esa no es una dificultad valida.");
+            }
+            else {
+            	cr.saveScore(dif, score, usr);
+            }
         }
-        
-        cr.saveScore(dif, score, usr);
     }
     
     private static void menuShowRank(Scanner input) {
@@ -41,41 +45,25 @@ public class DriverCtrlRanking {
         System.out.println("3. Dificil");
         int rankget = input.nextInt();
         if (rankget < 1 || rankget > 3){
-         System.out.println("Introduce una cifra valida");
-         menuShowRank(input);
+	        System.out.println("Introduce una cifra valida");
         }
         else System.out.println(cr.getRank(rankget));
     }
     
     private static void menuChangeUsr(Scanner input) {
-         System.out.println("Introduce su nombre de usuario:");
+         System.out.println("Introduce su antiguo nombre de usuario:");
          String usr1=input.next();
          
          System.out.println("Introduce su nuevo nombre de usuario: ");
          String usr2=input.next();
          
-         cr.modifyUsr(usr1, usr2);
+         cr.modifyUsr(usr2, usr1);
     }
         
     private static void menuDeleteUsr(Scanner input) {
         System.out.println("Introduce su nombre de usuario:");
         String usr=input.next();
         cr.deleteUsrRanking(usr);
-    }
-    
-    private static void menuPos(Scanner input){
-        System.out.println("Selecciona la dificultad");
-        System.out.println("1. Facil");
-        System.out.println("2. Normal");
-        System.out.println("3. Dificil");
-        int posdif = input.nextInt();
-        if (posdif < 1 || posdif > 3){
-         System.out.println("Introduce una cifra valida");
-         menuPos(input);
-        }
-        System.out.println("Introduce un usuario");
-        String usr = input.next();
-        cr.getPos(usr,posdif);
     }
     
     private static void menuGetScore(Scanner input){
@@ -86,7 +74,6 @@ public class DriverCtrlRanking {
         int scoredif = input.nextInt();
         if (scoredif < 1 || scoredif > 3){
 			System.out.println("Introduce una cifra valida");
-			menuGetScore(input);
         }
         else {
         	System.out.println("Introduce un usuario");

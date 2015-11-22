@@ -1,4 +1,3 @@
-package hidato;
 
 public class CtrlPartida {
 	private String usr;
@@ -32,10 +31,11 @@ public class CtrlPartida {
 		return aux.grPartida(id);
 	}
 	
-	public void guardarRanking(){
+	public void guardarRanking(CtrlRanking r){
 		actual.setScore();
 		int score = actual.getScore();
-		////////////////////////////////////////Hem Falta el CtrlRanking
+		int dificultad = 1;
+		r.saveScore(dificultad, score, usr);
 	}
 	
 	//Si el valor == 0, aleshores esborrem una casella

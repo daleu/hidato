@@ -10,6 +10,9 @@ public class TaulellHidato extends Taulell {
 	private int[] given;
 	private int[] start;
 	private int tamany;
+	
+	private int perposar;
+	private int posats;
 
 	public TaulellHidato(int tam) {
 		super(tam);
@@ -27,7 +30,8 @@ public class TaulellHidato extends Taulell {
 	}
 	
 	public boolean fesTaulell(int[][] input) {
-		 
+		perposar=0;
+		posats=0;
         List<Integer> list = new ArrayList<Integer>();
  
         Matriu_solucio = new int[input.length+2][input[0].length+2];
@@ -50,6 +54,7 @@ public class TaulellHidato extends Taulell {
         			Matriu_joc[i-1][j-1].setPosicion(j-1,i-1);
         			Matriu_joc[i-1][j-1].setValor(0);
         			Matriu_joc[i-1][j-1].setEditable(true);
+        			++perposar;
         		}
         		else {
         			Matriu_joc[i-1][j-1].setPosicion(j-1,i-1);
@@ -62,6 +67,7 @@ public class TaulellHidato extends Taulell {
         }
         
         Collections.sort(list);
+       // posts=list.clone();
         given = new int[list.size()];
         for (int i = 0; i < given.length; i++)
             given[i] = list.get(i);
@@ -89,8 +95,8 @@ public class TaulellHidato extends Taulell {
 		
 		for(int i = 0; i < aux.length - 2; ++i) {
 			for(int j = 0; j < aux[0].length - 2; ++j) {
-				if(Matriu_joc[i][j].getEditable()) aux[i+1][j+1] = 0;
-				else aux[i+1][j+1] = Matriu_joc[i][j].getValor();
+				/*if(Matriu_joc[i][j].getEditable()) aux[i+1][j+1] = 0;
+				else */ aux[i+1][j+1] = Matriu_joc[i][j].getValor();
 			}
 		}
 		
@@ -98,6 +104,8 @@ public class TaulellHidato extends Taulell {
 	}
 	
 	public void crearTaulellRandom(int forats, int nombresFixos){
+		perposar=(tamany*tamany)-forats-2-nombresFixos;
+		posats=0;
 		CtrlJoc juego = new CtrlJoc();
 		int[][] input = new int[tamany][tamany];
 		boolean[][] inputb = new boolean [tamany][tamany];
@@ -129,6 +137,29 @@ public class TaulellHidato extends Taulell {
     			else Matriu_joc[i-1][j-1].setValor(input[i-1][j-1]);
         	}
         }
+	}
+	
+	public boolean[] modValor(int fila, int columna, int valor){
+		boolean[] aux = new boolean[2];
+		if (Matriu_joc[fila][columna].getEditable()){
+			aux[0]=true;
+			if(valor==0 && Matriu_joc[fila][columna].getValor()!=valor)--posats;
+			else if (valor!=0 && Matriu_joc[fila][columna].getValor()==0) ++posats;
+			if (posats==perposar)aux[1]=true;
+			else aux[1]=false;
+			Matriu_joc[fila][columna].setValor(valor);
+			System.out.println(posats + " de " + perposar);
+			return aux;
+		}
+		else {
+			aux[0]=false;
+			aux[1]=false;
+			return aux;
+		}
+	}
+	
+	public int getNoFixes(){
+		return perposar;
 	}
 	
 	public int getTiempoBronce(){

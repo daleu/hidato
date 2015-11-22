@@ -1,13 +1,15 @@
-package usuarios;
-//import java.util.Vector;
+
 
 import java.io.BufferedReader;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+
+//S'ha d'arreglar! es una merda! no se que cony passa!!!!
 public class GestorUsr {
 	
 	/*Constructora*/
@@ -17,33 +19,32 @@ public class GestorUsr {
 	
 	//Afegir Usuari
 	public boolean afegirUsuari(Usuario u){
-		boolean x = false;
+		boolean afegit=false;
 		try{
-			File aux = new File("/Usuaris/" + u.getUsr());
-			if (!aux.exists()){
-				aux.mkdirs();
-				File axu = new File("/Usuaris/" + u.getUsr() + "/password.txt");
-				axu.createNewFile();
-				FileWriter esc = new FileWriter("/Usuaris/" + u.getUsr() + "/password.txt",true);
-				BufferedWriter bw = new BufferedWriter(esc);
+			File fichero = new File("usuaris/"+u.getUsr()+".txt");
+			if (!fichero.exists()){
+				afegit=true;
+				fichero.createNewFile();
+				FileWriter esc =new FileWriter("usuaris/"+u.getUsr()+".txt",true);
+				BufferedWriter bw = new BufferedWriter(esc); 
 				bw.write(u.getPass());
 				bw.close();
 				esc.close();
-				x = true;
 			}
+			else afegit=false;
 		}catch(IOException ex){
-			
+			// S'ha de fer encara
 		}
-		return x;
+		return afegit;
 	}
 	
 	//Comprovar Usuari
 	public boolean comprovarUsr(Usuario u){
 		boolean trobat=false;
 		try{
-			File aux = new File("/Usuaris/" + u.getUsr());
-			if (aux.exists()){
-				FileReader fr = new FileReader("/Usuaris/" + u.getUsr() + "/password.txt");
+			File fichero = new File(":usuaris",u.getUsr()+".txt");
+			if (fichero.exists()){
+				FileReader fr = new FileReader(":usuaris/"+u.getUsr()+".txt");
 				BufferedReader bf = new BufferedReader(fr);
 				String cont =bf.readLine();
 				bf.close();
@@ -61,13 +62,13 @@ public class GestorUsr {
 	public boolean modUsr(String uact, String unou, String pass){
 		boolean trobat=false;
 		try{
-			File fichero = new File("/Usuaris/" + uact);
+			File fichero = new File("usuaris/"+uact+".txt");
 			if (fichero.exists()){
 				trobat=true;
 				fichero.delete();
-				File fichero2 = new File("/Usuaris/" + unou);
-				fichero2.mkdir();
-				FileWriter esc =new FileWriter("/Usuaris/" + unou + "/password.txt",true);
+				File fichero2 = new File("usuaris/"+unou+".txt");
+				fichero2.createNewFile();
+				FileWriter esc =new FileWriter("usuaris/"+unou+".txt",true);
 				BufferedWriter bw = new BufferedWriter(esc); 
 				bw.write(pass);
 				bw.close();
@@ -84,10 +85,10 @@ public class GestorUsr {
 	public boolean modPassword(String u, String pass){
 		boolean trobat=false;
 		try{
-			File fichero = new File("/Usuaris/" + u);
+			File fichero = new File("usuaris/"+u+".txt");
 			if (fichero.exists()){
 				trobat=true;
-				FileWriter esc =new FileWriter("/Usuaris/" + u + "/password.txt");
+				FileWriter esc =new FileWriter("usuaris/"+u+".txt");
 				BufferedWriter bw = new BufferedWriter(esc); 
 				bw.write(pass);
 				bw.close();

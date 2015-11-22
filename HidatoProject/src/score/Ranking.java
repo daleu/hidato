@@ -11,7 +11,6 @@ public class Ranking {
 	protected ArrayList<PairIntString> facil;
 	protected ArrayList<PairIntString> normal;
 	protected ArrayList<PairIntString> dificil;
-	//private ControladorDomini cd = new ControladorDomini();
 	
 	/*Contructores*/
 	
@@ -19,23 +18,22 @@ public class Ranking {
 		this.facil = new ArrayList<PairIntString>();
 		this.normal = new ArrayList<PairIntString>();
 		this.dificil = new ArrayList<PairIntString>();
-		
-		//this.cd = new ControladorDomini();
 	}
 	
 	/*Consultores*/
 	
 	//dificultat=1 -> easy, dificultat=2 -> normal, dificultat=3 -> dificil
 	public ArrayList<PairIntString> getRank(int dificultat){
-		
 		switch (dificultat) {
 		case DIF_EAS:
-			return (ArrayList<PairIntString>) facil.clone();
+			return facil;
 		case DIF_NOR:
-			return (ArrayList<PairIntString>) normal.clone();
+			return normal;
 		case DIF_HAR:
-			return (ArrayList<PairIntString>) dificil.clone();
+			return dificil;
 		}
+		
+		
 		return null;
 	}
 	
@@ -50,16 +48,24 @@ public class Ranking {
 			while (it.hasNext()) {
 				if (it.next().getSecond().equals(user)) ap.add(it.previousIndex());
 			}
+			break;
+			
 		case DIF_NOR:
 			it = normal.listIterator();
 			while (it.hasNext()) {
 				if (it.next().getSecond().equals(user)) ap.add(it.previousIndex());
 			}
+			break;
+			
 		case DIF_HAR:
 			it = dificil.listIterator();
 			while (it.hasNext()) {
 				if (it.next().getSecond().equals(user)) ap.add(it.previousIndex());
 			}
+			break;
+			
+		default:
+			break;
 		}
 		return ap;
 	}
@@ -79,6 +85,8 @@ public class Ranking {
 					ap.add(pis.getFirst());
 				}
 			}
+			break;
+			
 		case DIF_NOR:
 			it = normal.listIterator();
 			while (it.hasNext()) {
@@ -87,6 +95,8 @@ public class Ranking {
 					ap.add(pis.getFirst());
 				}
 			}
+			break;
+			
 		case DIF_HAR:
 			it = dificil.listIterator();
 			while (it.hasNext()) {
@@ -95,6 +105,10 @@ public class Ranking {
 					ap.add(pis.getFirst());
 				}
 			}
+			break;
+			
+		default:
+			break;
 		}
 		return ap;
 	}
@@ -104,26 +118,32 @@ public class Ranking {
 	public void addNewRanking(int dificultat, int score, String user) {
 		ListIterator<PairIntString> it = null;
 		PairIntString pis, newPis;
-		boolean inserted = false;
+		boolean found = false;
 		newPis = new PairIntString(score, user);
 		
 		switch (dificultat) {
 			case DIF_EAS:
 				it = facil.listIterator();
+				break;
 				
 			case DIF_NOR:
 				it = normal.listIterator();
+				break;
 				
 			case DIF_HAR:
 				it = dificil.listIterator();
+				break;
+				
+			default:
+				break;
 				
 		}
-		
-		while (it.hasNext() && !inserted) {
+		while (it.hasNext() && !found) {
+	
 			pis = it.next();
-			if (pis.getFirst() > score) {
+			if (pis.getFirst() < score) {
 				it.previous();
-				it.add(newPis);				// it.add(newPis) anade newPis justo
+											// it.add(newPis) anade newPis justo
 											// antes de it.next(), que seria despues
 											// de pis. Y como lo queremos just antes,
 											// llamo a it.previous() para que it.next()
@@ -131,11 +151,12 @@ public class Ranking {
 											// valor de pis. Despues de esto no hace
 											//volver a donde estabamos con it.next()
 											// porque ponemos inserted = true
-				inserted = true;
+				found = true;
 			}
 			
 		}
 		
+		it.add(newPis);
 	}
 	
 	public void deleteUsrRanking(String user) {
@@ -163,24 +184,35 @@ public class Ranking {
 	
 	public void modifyUsr(String userActual, String userAnterior) {
 		ListIterator<PairIntString> it;
-		PairIntString pis;
+		PairIntString pis, newPis;
 		
 		it = facil.listIterator();
 		while (it.hasNext()) {
 			pis = it.next();
-			if (pis.getSecond().equals(userAnterior)) pis.setSecond(userActual);
+			if (pis.getSecond().equals(userAnterior)) {
+				newPis = new PairIntString(pis.getFirst(), userActual);
+				it.add(newPis);
+			}
 		}
 	
 		it = normal.listIterator();
 		while (it.hasNext()) {
 			pis = it.next();
-			if (pis.getSecond().equals(userAnterior)) pis.setSecond(userActual);
+			if (pis.getSecond().equals(userAnterior)) {
+				newPis = new PairIntString(pis.getFirst(), userActual);
+				it.add(newPis);
+			}
 		}
 		
 		it = dificil.listIterator();
 		while (it.hasNext()) {
 			pis = it.next();
-			if (pis.getSecond().equals(userAnterior)) pis.setSecond(userActual);
+			if (pis.getSecond().equals(userAnterior)) {
+				newPis = new PairIntString(pis.getFirst(), userActual);
+				it.add(newPis);
+			}
 		}
+		
+		deleteUsrRanking(userAnterior);
 	}
 }

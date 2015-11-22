@@ -48,13 +48,13 @@ public class DriverRanking {
     }
     
     private static void menuChangeUsr(Scanner input) {
-         System.out.println("Introduce su nombre de usuario:");
+         System.out.println("Introduce su antiguo nombre de usuario:");
          String usr1=input.next();
          
          System.out.println("Introduce su nuevo nombre de usuario: ");
          String usr2=input.next();
          
-         r.modifyUsr(usr1, usr2);
+         r.modifyUsr(usr2, usr1);
     }
         
     private static void menuDeleteUsr(Scanner input) {

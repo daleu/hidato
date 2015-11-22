@@ -1,3 +1,4 @@
+package hidato;
 import java.util.Random;
 
 class Partida{
