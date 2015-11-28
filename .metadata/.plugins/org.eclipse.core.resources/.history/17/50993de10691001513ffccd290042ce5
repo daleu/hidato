@@ -1,0 +1,43 @@
+package score;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class GestorRanking {
+	
+	public GestorRanking() {
+		
+	}
+	
+	public void store(Ranking r) {
+		boolean x = false;
+		try{
+			File aux = new File("/Ranking");
+			if (!aux.exists()){
+				aux.mkdirs();
+				File fac = new File("/Usuaris/facil.txt");
+				fac.createNewFile();
+				File nor = new File("/Usuaris/normal.txt");
+				nor.createNewFile();
+				File dif = new File("/Usuaris/dificil.txt");
+				dif.createNewFile();
+				FileWriter esc = new FileWriter("/Usuaris/" + u.getUsr() + "/password.txt",true);
+				BufferedWriter bw = new BufferedWriter(esc);
+				bw.write(u.getPass());
+				bw.close();
+				esc.close();
+				x = true;
+			}
+		}catch(IOException ex){
+			
+		}
+		return x;
+	}
+	
+	public Ranking load() {
+		Ranking r = new Ranking();		//Habra que cambiarlo por una carga desde txt de verdad
+		return r;
+	}
+}

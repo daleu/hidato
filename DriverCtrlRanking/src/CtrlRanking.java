@@ -4,16 +4,15 @@ import java.util.ListIterator;
 public class CtrlRanking {
 	
 	Ranking r;
+	GestorRanking gr;
 
 	public CtrlRanking() {
-		GestorRanking gr = new GestorRanking();
+		gr = new GestorRanking();
 		r = gr.load();
 	}
 	
 	public void saveScore(int dif, int score, String usr) {
 		r.addNewRanking(dif, score, usr);
-		
-		GestorRanking gr = new GestorRanking();
 		gr.store(r);
 	}
 	
@@ -63,15 +62,11 @@ public class CtrlRanking {
 	
 	public void deleteUsrRanking(String usr) {
 		r.deleteUsrRanking(usr);
-		
-		GestorRanking gr = new GestorRanking();
 		gr.store(r);
 	}
 	
 	public void modifyUsr(String newName, String oldName) {
 		r.modifyUsr(newName, oldName);
-		
-		GestorRanking gr = new GestorRanking();
 		gr.store(r);
 	}
 }

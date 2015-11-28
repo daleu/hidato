@@ -1,0 +1,62 @@
+package score;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+
+public class GestorRanking {
+	
+	public GestorRanking() {
+		
+	}
+	
+	public void store(Ranking r) {
+		try{
+			File aux = new File("/Ranking");
+			if (!aux.exists()) aux.mkdirs();
+			File fac = new File("/Ranking/facil.txt");
+			fac.createNewFile();
+			File nor = new File("/Ranking/normal.txt");
+			nor.createNewFile();
+			File dif = new File("/Ranking/dificil.txt");
+			dif.createNewFile();
+			ArrayList<PairIntString> arrayfac = r.getRank(1);
+			ArrayList<PairIntString> arraynor = r.getRank(2);
+			ArrayList<PairIntString> arraydif = r.getRank(3);
+			FileWriter escfac = new FileWriter("/Ranking/facil.txt");
+			BufferedWriter bwfac = new BufferedWriter(escfac);
+			for (int i=0; i<arrayfac.size(); ++i){
+				bwfac.write(arrayfac.get(i).getSecond());
+				bwfac.write(arrayfac.get(i).getFirst());
+			}
+			bwfac.close();
+			escfac.close();
+			FileWriter escnor = new FileWriter("/Ranking/facil.txt");
+			BufferedWriter bwnor = new BufferedWriter(escfac);
+			for (int i=0; i<arraynor.size(); ++i){
+				bwnor.write(arraynor.get(i).getSecond());
+				bwnor.write(arraynor.get(i).getFirst());
+			}
+			bwnor.close();
+			escnor.close();
+			FileWriter escdif = new FileWriter("/Ranking/facil.txt");
+			BufferedWriter bwdif = new BufferedWriter(escfac);
+			for (int i=0; i<arraydif.size(); ++i){
+				bwdif.write(arraydif.get(i).getSecond());
+				bwdif.write(arraydif.get(i).getFirst());
+			}
+			bwdif.close();
+			escdif.close();
+		}catch(IOException ex){
+			
+		}
+	}
+	
+	public Ranking load() {
+		Ranking r = new Ranking();		
+		
+		return r;
+	}
+}

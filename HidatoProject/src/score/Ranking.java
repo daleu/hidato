@@ -33,7 +33,6 @@ public class Ranking {
 			return dificil;
 		}
 		
-		
 		return null;
 	}
 	
