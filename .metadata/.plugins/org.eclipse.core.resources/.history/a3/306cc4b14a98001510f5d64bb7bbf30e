@@ -1,0 +1,72 @@
+import java.util.ArrayList;
+import java.util.ListIterator;
+
+public class CtrlRanking {
+	
+	Ranking r;
+	GestorRanking gr;
+
+	public CtrlRanking() {
+		gr = new GestorRanking();
+		r = gr.load();
+	}
+	
+	public void saveScore(int dif, int score, String usr) {
+		r.addNewRanking(dif, score, usr);
+		gr.store(r);
+	}
+	
+	public String getRank(int dif) {
+		ArrayList<PairIntString> rank = r.getRank(dif);
+		ListIterator<PairIntString> it = rank.listIterator();
+		String s = "";
+		PairIntString aux = null;
+			
+		while(it.hasNext()) {
+			aux = it.next();
+			s += (it.previousIndex() + 1) + ": " + aux.getFirst() + " - " + aux.getSecond() + "\n"; // "pos,score,usuario<salto-de-linea>"
+			
+		}
+		
+		s += ".";		//indica final de string
+		
+		return s;
+	}
+	
+	public ArrayList<Integer> getPos(String usr, int dif) {
+		return r.getPos(usr, dif);
+	}
+	
+	public ArrayList<Integer> getScore(String usr, int dif) {
+		return r.getScore(usr, dif);
+	}
+	
+	public String getUsrScore(String usr, int dif) {
+		ArrayList<Integer> pos = r.getPos(usr, dif);
+		ArrayList<Integer> score = r.getScore(usr, dif);
+		String s = usr + ":\n";
+		ListIterator<Integer> itPos = pos.listIterator();
+		ListIterator<Integer> itScore = score.listIterator();
+		int aux;
+		
+		while(itPos.hasNext() && itScore.hasNext()) {
+			aux = itPos.next();
+			s += (aux + 1) + ": "; // "pos,"
+			aux = itScore.next();
+			s += aux + "\n"; //"pos,score<salto-de-linea>"
+		}
+		s += ".";	//indica final de string
+		
+		return s;
+	}
+	
+	public void deleteUsrRanking(String usr) {
+		r.deleteUsrRanking(usr);
+		gr.store(r);
+	}
+	
+	public void modifyUsr(String newName, String oldName) {
+		r.modifyUsr(newName, oldName);
+		gr.store(r);
+	}
+}

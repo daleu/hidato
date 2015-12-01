@@ -22,10 +22,9 @@ public class GestorUsr {
 		boolean x = false;
 		try{
 			File aux = new File("Usuaris/" + u.getUsr());
-			System.out.println(aux.getAbsolutePath());
 			if (!aux.exists()){
-				aux.mkdir();
-				File axu = new File("Usuaris/" + u.getUsr() + "/password.txt");
+				aux.mkdirs();
+				File axu = new File("Usuaris/" + u.getUsr() + "/", "password.txt");
 				axu.createNewFile();
 				FileWriter esc = new FileWriter("Usuaris/" + u.getUsr() + "/password.txt",true);
 				BufferedWriter bw = new BufferedWriter(esc);
@@ -62,21 +61,11 @@ public class GestorUsr {
 	//Modifica el nom d'un Usuari
 	public boolean modUsr(String uact, String unou, String pass){
 		boolean trobat=false;
-		try{
-			File fichero = new File("Usuaris/" + uact);
-			if (fichero.exists()){
-				fichero.delete();
-				File fichero2 = new File("Usuaris/" + unou);
-				fichero2.mkdir();
-				FileWriter esc =new FileWriter("Usuaris/" + unou + "/password.txt",true);
-				BufferedWriter bw = new BufferedWriter(esc); 
-				bw.write(pass);
-				bw.close();
-				esc.close();
-				trobat=true;
-			}
-		}catch(IOException ex){
-			// S'ha de fer encara
+		File fichero = new File("Usuaris/" + uact);
+		if (fichero.exists()){
+			File fichero2 = new File("Usuaris/" + unou);
+			fichero.renameTo(fichero2);
+			trobat = true;
 		}
 		return trobat;
 	}
