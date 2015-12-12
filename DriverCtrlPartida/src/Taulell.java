@@ -3,7 +3,7 @@ import java.io.IOException;
 public class Taulell {
 	
 	public Casilla Matriu_joc [][];
-	private int Matriu_solucio [][];
+	public int Matriu_solucio [][];
 	
 	//Constructores
 	// Inicialitza matrius amb mida "tamany x tamany"

@@ -56,12 +56,25 @@ class Partida{
 		int cas =taulellh.getNoFixes();
 		int tempsPerf=cas*15;
 		tempsPerf=2*tempsPerf;
-		score=tempsPerf-temps.getSegundos();
+		score=tempsPerf-temps.getSegundos()-penal;
 	}
 	
 	public boolean[] modCas(int fila, int columna, int valor){
 		return taulellh.modValor(fila, columna, valor);
 	}
+	
+	public void setTime(int te){
+		temps = new Contador(te,false);
+	}
+	
+	public void setPenalitzacio(int pen){
+		penal = pen;
+	}
+	
+	public void setTaulell(TaulellHidato aux){
+		taulellh = aux;
+	}
+	
 
 // Consultores
 	public int getScore(){

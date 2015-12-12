@@ -1,3 +1,9 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class GestorPartides {
 
@@ -5,12 +11,262 @@ public class GestorPartides {
 		
 	}
 	
-	public Partida getPartida(String id){
-		return null;
+	public Partida getPartida(String id, String user){
+		Partida nova = new Partida();
+		try{
+			
+			File mid = new File("Partides/" + user + "/" + id + "/Taulell/mida.txt");
+			Scanner scmid = new Scanner(mid);
+			int mida = scmid.nextInt();
+			TaulellHidato aux = new TaulellHidato(mida);
+			scmid.close();
+			
+			File tauSol = new File("Partides/" + user + "/" + id + "/Taulell/taulellSol.txt");
+			Scanner in = new Scanner(tauSol);
+			int[][] matriuSol = new int[mida][mida];
+			for (int i=0; i<mida;++i){
+	        	for (int j=0; j<mida; ++j)
+	        	matriuSol[i][j] = in.nextInt();
+	        }
+			aux.setSolucio(matriuSol);
+	        in.close();
+						
+			File tauJoc = new File("Partides/" + user + "/" + id + "/Taulell/taulellJoc.txt");
+			Scanner in2 = new Scanner(tauJoc);
+			Casilla[][] matriuJoc = new Casilla[mida][mida];
+			int col, fil, val;
+			boolean edit;
+			for (int x=0; x<mida;++x){
+	        	for (int r=0; r<mida; ++r){
+		        	fil = in2.nextInt();
+		        	col = in2.nextInt();
+		        	val = in2.nextInt();
+		        	edit = in2.nextBoolean();
+		        	Casilla arr = new Casilla();
+		        	arr.setPosicion(col, fil);
+		        	arr.setValor(val);
+		        	arr.setEditable(edit);
+		        	matriuJoc[x][r] = arr;
+	        	}
+	        }
+			aux.setTaulell(matriuJoc);
+	        in2.close();
+	
+			File giv = new File("Partides/" + user + "/" + id + "/Taulell/given.txt");
+			Scanner scgiv = new Scanner(giv);
+			ArrayList<Integer> list = new ArrayList<Integer>();
+			while(scgiv.hasNextInt()){
+				list.add(scgiv.nextInt());
+			}
+			int[] given = new int[list.size()];
+			for (int i=0; i<given.length; ++i) given[i] = list.get(i);
+			aux.setPosIni(given);
+			scgiv.close();
+			
+			File sta = new File("Partides/" + user + "/" + id + "/Taulell/start.txt");
+			Scanner scsta = new Scanner(sta);
+			int[] start = new int[2];
+			start[0] = scsta.nextInt();
+			start[1] = scsta.nextInt();
+			aux.setPosIni(start);
+			scsta.close();
+			
+			File post = new File("Partides/" + user + "/" + id + "/Taulell/posats.txt");
+			Scanner scpost = new Scanner(post);
+			int posats = scpost.nextInt();
+			aux.setPosats(posats);
+			scpost.close();
+			
+			
+			File perpos = new File("Partides/" + user + "/" + id + "/Taulell/perposar.txt");
+			Scanner scperpos = new Scanner(perpos);
+			int perposar = scperpos.nextInt();
+			aux.setPerPosar(perposar);
+			scperpos.close();
+			
+			nova.setTaulell(aux);
+			
+			File temps = new File("Partides/" + user + "/" + id, "time.txt");
+			Scanner sctemps = new Scanner(temps);
+			int pertemps = sctemps.nextInt();
+			nova.setTime(pertemps);
+			sctemps.close();
+			
+			File pen = new File("Partides/" + user + "/" + id, "penalitzacio.txt");		
+			Scanner scpen = new Scanner(pen);
+			int pe = scpen.nextInt();
+			nova.setPenalitzacio(pe);
+			scpen.close();
+			
+		} catch(IOException e){
+			System.out.println("Error al carregar el fitxer");
+		}
+		return nova;
 	}
 
-	public boolean grPartida(String id) {
-		return false;
+	public boolean guardarPartida(String id, Partida actual, String user) {
+		boolean guardat = false;
+		try{
+			File aux2 = new File("Partides/" + user + "/" + id + "/Taulell");
+			if (!aux2.exists())aux2.mkdirs();
+			
+			TaulellHidato aux = actual.getTaulell();
+			
+			File mid = new File("Partides/" + user + "/" + id + "/Taulell/mida.txt");
+			mid.createNewFile();
+			int mida = aux.getMida();
+			FileWriter escmid = new FileWriter("Partides/" + user + "/" + id + "/Taulell/mida.txt");
+			BufferedWriter bwmid = new BufferedWriter(escmid);
+			bwmid.write(String.valueOf(mida));
+			bwmid.close();
+			escmid.close();
+			 
+			File tauSol = new File("Partides/" + user + "/" + id + "/Taulell/taulellSol.txt");
+			tauSol.createNewFile();
+			FileWriter esctausol = new FileWriter("Partides/" + user + "/" + id + "/Taulell/taulellSol.txt");
+			BufferedWriter bwtausol = new BufferedWriter(esctausol);
+			int[][] sol1 = aux.getSolucio();
+			String f = null;
+			for (int i = 0; i<mida; ++i){
+				  for (int j=0; j<mida; ++j){
+					  if(j==0) f = sol1[i+1][j+1] + " ";
+					  else f += sol1[i+1][j+1] + " ";
+				  }
+				  bwtausol.write(f);
+				  bwtausol.newLine();
+			}
+			bwtausol.close();
+			esctausol.close();
+			
+			///////////////////////////////////////////////////////////////////////////////////////////
+			File tauJoc = new File("Partides/" + user + "/" + id + "/Taulell/taulellJoc.txt");
+			tauJoc.createNewFile();
+			FileWriter escjoc = new FileWriter("Partides/" + user + "/" + id + "/Taulell/taulellJoc.txt");
+			BufferedWriter bwjoc = new BufferedWriter(escjoc);
+			Casilla[][] joc= aux.getTaulell();
+			String jo = null;
+			for (int r = 0; r<mida; ++r){
+				  for (int k=0; k<mida; ++k){
+					  if(k==0) jo = joc[r][k].getFila() + " " + joc[r][k].getColumna() + " " + joc[r][k].getValor() +  " " + joc[r][k].getEditable() + " ";
+					  else jo += joc[r][k].getFila() + " " + joc[r][k].getColumna() + " " + joc[r][k].getValor() +  " " + joc[r][k].getEditable() + " ";
+				  }
+				  bwjoc.write(jo);
+				  bwjoc.newLine();
+			}
+			bwjoc.close();
+			escjoc.close();
+			
+			File giv = new File("Partides/" + user + "/" + id + "/Taulell/given.txt");	
+			giv.createNewFile();
+			FileWriter escgiv = new FileWriter("Partides/" + user + "/" + id + "/Taulell/given.txt");
+			BufferedWriter bwgiv = new BufferedWriter(escgiv);
+			int[] givn = aux.getDonats();
+			String g = null;
+			for (int x = 0; x <givn.length; ++x){
+				if(x==0) g = givn[x] + " ";
+				else g += givn[x] + " ";
+			}
+			bwgiv.write(g);
+			bwgiv.close();
+			escgiv.close();
+			
+			File sta = new File("Partides/" + user + "/" + id + "/Taulell/start.txt");
+			sta.createNewFile();
+			FileWriter escsta = new FileWriter("Partides/" + user + "/" + id + "/Taulell/start.txt");
+			BufferedWriter bwsta = new BufferedWriter(escsta);
+			int[] stn = aux.getPosIni();
+			String a = stn[0] + " " + stn[1];
+			bwsta.write(a);
+			bwsta.close();
+			escsta.close();
+			
+			File post = new File("Partides/" + user + "/" + id + "/Taulell/posats.txt");	
+			post.createNewFile();
+			FileWriter escpost = new FileWriter("Partides/" + user + "/" + id + "/Taulell/posats.txt");
+			BufferedWriter bwpost = new BufferedWriter(escpost);
+			int pos = aux.getPosats();
+			bwpost.write(String.valueOf(pos));
+			bwpost.close();
+			escpost.close();
+			
+			File perpos = new File("Partides/" + user + "/" + id + "/Taulell/perposar.txt");	
+			perpos.createNewFile();
+			FileWriter escperpos = new FileWriter("Partides/" + user + "/" + id + "/Taulell/perposar.txt");
+			BufferedWriter bwperpos = new BufferedWriter(escperpos);
+			int pospe = aux.getPerPosar();
+			bwperpos.write(String.valueOf(pospe));
+			bwperpos.close();
+			escperpos.close();
+			
+			////////////////////////////////////////////////////////////////Fitxer temps//////////////////////////////////
+			File temps = new File("Partides/" + user + "/" + id, "time.txt");
+			temps.createNewFile();
+			int time = actual.getTime();
+			FileWriter primer = new FileWriter(temps);
+			BufferedWriter segon = new BufferedWriter(primer);
+			segon.write(String.valueOf(time));
+			segon.close();
+			primer.close();
+			
+			////////////////////////////////////////////////////////////////Penalitzacions
+			File pen = new File("Partides/" + user + "/" + id, "penalitzacio.txt");
+			pen.createNewFile();
+			int pena = actual.getPenalitzacio();
+			FileWriter primer1 = new FileWriter(pen);
+			BufferedWriter segon1 = new BufferedWriter(primer1);
+			segon1.write(String.valueOf(pena));
+			segon1.close();
+
+			guardat=true;
+		} catch (IOException e){
+			guardat = false;
+		}
+		return guardat;
 	}
+	
+	//Quan esborrem un usuari!!
+	public boolean esbPartidaUsr(String nom_usr){
+    	boolean fet = false;
+    	File ids =  new File("Partides/" + nom_usr);
+    	if(ids.exists()) deleteFolder(ids);
+    	fet = true;
+    	return fet;
+    }
+	
+	//Esborrar una Partida concreta!
+	public boolean esbPartida(String nom_usr, String id){
+    	boolean fet = false;
+    	File ids =  new File("Partides/" + nom_usr + "/" + id);
+    	if(ids.exists()) deleteFolder(ids);
+    	fet = true;
+    	return fet;
+    }
+    
+	//Auxiliar per borrar
+    private static void deleteFolder(File folder) {
+        File[] files = folder.listFiles();
+        if(files!=null) { 
+            for(File f: files) {
+                if(f.isDirectory()) {
+                    deleteFolder(f);
+                } else {
+                    f.delete();
+                }
+            }
+        }
+        folder.delete();
+    }
+    
+    //Modificar nom usuari
+    public boolean modPartidaUsr(String act, String ant){
+    	boolean fet = false;
+    	File ids =  new File("Partides/" + ant);
+    	if(ids.exists()){
+    		File ids2 =  new File("Partides/" + act);
+    		ids.renameTo(ids2);
+    	}
+    	fet = true;
+    	return fet;
+    }
 	
 }

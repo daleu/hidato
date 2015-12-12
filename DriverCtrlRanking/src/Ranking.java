@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
-public class Ranking {
+public class Ranking{
 	
 	private static final int DIF_EAS = 1;
 	private static final int DIF_NOR = 2;

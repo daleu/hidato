@@ -1,5 +1,9 @@
 package usuarios;
 
+import hidato.GestorPartides;
+import hidato.GestorTaulells;
+import score.CtrlRanking;
+
 public class CtrlUsr {
 	
 	private Usuario current;
@@ -34,6 +38,12 @@ public class CtrlUsr {
 		if (uact.equals(current.getUsr())){
 			Usuario newCurrent = new Usuario(unou, current.getPass());
 			fet=gu.modUsr(uact, unou, newCurrent.getPass());
+			GestorTaulells aux1 = new GestorTaulells();
+			aux1.modTaulellUsr(uact, unou);
+			GestorPartides aux2 = new GestorPartides();
+			aux2.modPartidaUsr(uact, unou);
+			CtrlRanking aux3 = new CtrlRanking();
+			aux3.modifyUsr(unou, uact);
 			if (fet) current = newCurrent;
 		}
 		return fet;
@@ -46,6 +56,20 @@ public class CtrlUsr {
 			Usuario newCurrent = new Usuario(current.getUsr(), pnov);
 			fet=gu.modPassword(newCurrent.getUsr(), pnov);
 			if (fet) current = newCurrent;
+		}
+		return fet;
+	}
+	
+	public boolean esbUsr(String usr){
+		boolean fet = false;
+		if (usr.equals(current.getUsr())){
+			fet=gu.esbUsuari(usr);
+			GestorTaulells aux1 = new GestorTaulells();
+			aux1.esbTaulellsUsr(usr);
+			GestorPartides aux2 = new GestorPartides();
+			aux2.esbPartidaUsr(usr);
+			CtrlRanking aux3 = new CtrlRanking();
+			aux3.deleteUsrRanking(usr);
 		}
 		return fet;
 	}

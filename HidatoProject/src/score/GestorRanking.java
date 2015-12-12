@@ -1,12 +1,10 @@
 package score;
-
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class GestorRanking {
 	
@@ -27,27 +25,28 @@ public class GestorRanking {
 			ArrayList<PairIntString> arrayfac = r.getRank(1);
 			ArrayList<PairIntString> arraynor = r.getRank(2);
 			ArrayList<PairIntString> arraydif = r.getRank(3);
-			FileWriter escfac = new FileWriter("/Ranking/facil.txt");
+			FileWriter escfac = new FileWriter("Ranking/facil.txt");
 			BufferedWriter bwfac = new BufferedWriter(escfac);
+			String f = null;
 			for (int i=0; i<arrayfac.size(); ++i){
-				bwfac.write(arrayfac.get(i).getSecond());
-				bwfac.write(arrayfac.get(i).getFirst());
+				f = arrayfac.get(i).getSecond() + " " + arrayfac.get(i).getFirst() + " ";
+				bwfac.write(f);
 			}
 			bwfac.close();
 			escfac.close();
-			FileWriter escnor = new FileWriter("/Ranking/facil.txt");
-			BufferedWriter bwnor = new BufferedWriter(escfac);
+			FileWriter escnor = new FileWriter("Ranking/normal.txt");
+			BufferedWriter bwnor = new BufferedWriter(escnor);
 			for (int i=0; i<arraynor.size(); ++i){
-				bwnor.write(arraynor.get(i).getSecond());
-				bwnor.write(arraynor.get(i).getFirst());
+				f = arraynor.get(i).getSecond() + " " + arraynor.get(i).getFirst() + " ";
+				bwnor.write(f);
 			}
 			bwnor.close();
 			escnor.close();
-			FileWriter escdif = new FileWriter("/Ranking/facil.txt");
-			BufferedWriter bwdif = new BufferedWriter(escfac);
+			FileWriter escdif = new FileWriter("Ranking/dificil.txt");
+			BufferedWriter bwdif = new BufferedWriter(escdif);
 			for (int i=0; i<arraydif.size(); ++i){
-				bwdif.write(arraydif.get(i).getSecond());
-				bwdif.write(arraydif.get(i).getFirst());
+				f = arraydif.get(i).getSecond() + " " + arraydif.get(i).getFirst() + " ";
+				bwdif.write(f);
 			}
 			bwdif.close();
 			escdif.close();
@@ -57,46 +56,43 @@ public class GestorRanking {
 	}
 	
 	public Ranking load() {
-		Ranking r = new Ranking();		
+		Ranking r = new Ranking();
 		try{
-			File fac = new File("/Ranking/facil.txt");
+			File fac = new File("Ranking/", "facil.txt");
 			if (fac.exists()){
-				FileReader frfac = new FileReader("/Ranking/facil.txt");
-				BufferedReader bffac = new BufferedReader(frfac);
+				Scanner fc = new Scanner(fac);
 				int puntuacio;
 				String nom;
-				while ((nom=bffac.readLine())!=null){
-					puntuacio = Integer.parseInt(bffac.readLine());
+				while (fc.hasNext()){
+					nom = fc.next();
+					puntuacio = fc.nextInt();
 					r.addNewRanking(1, puntuacio, nom);
 				}
-				bffac.close();
-		        frfac.close();
+				fc.close();
 			}
-			File nor = new File("/Ranking/normal.txt");
+			File nor = new File("Ranking/", "normal.txt");
 			if (nor.exists()){
-				FileReader frnor = new FileReader("/Ranking/normal.txt");
-				BufferedReader bfnor = new BufferedReader(frnor);
+				Scanner nc = new Scanner(nor);
 				int puntuacio;
 				String nom;
-				while ((nom=bfnor.readLine())!=null){
-					puntuacio = Integer.parseInt(bfnor.readLine());
+				while (nc.hasNext()){
+					nom = nc.next();
+					puntuacio = nc.nextInt();
 					r.addNewRanking(2, puntuacio, nom);
 				}
-				bfnor.close();
-		        frnor.close();
+				nc.close();
 			}
-			File dif = new File("/Ranking/dificil.txt");
+			File dif = new File("Ranking/", "dificil.txt");
 			if (dif.exists()){
-				FileReader frdif = new FileReader("/Ranking/dificil.txt");
-				BufferedReader bfdif = new BufferedReader(frdif);
+				Scanner dc = new Scanner(dif);
 				int puntuacio;
 				String nom;
-				while ((nom=bfdif.readLine())!=null){
-					puntuacio = Integer.parseInt(bfdif.readLine());
+				while (dc.hasNext()){
+					nom = dc.next();
+					puntuacio = dc.nextInt();
 					r.addNewRanking(3, puntuacio, nom);
 				}
-				bfdif.close();
-		        frdif.close();
+				dc.close();
 			}
 		}catch(IOException ex){
 			

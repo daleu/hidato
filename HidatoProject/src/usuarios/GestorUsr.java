@@ -88,4 +88,14 @@ public class GestorUsr {
 		}
 		return trobat;
 	}
+	
+	public boolean esbUsuari(String u){
+		boolean borr = false;
+		File fichero = new File("Usuaris/" + u);
+		File esc = new File("Usuaris/" + u + "/password.txt");
+		esc.delete();
+		fichero.delete();
+		borr = true;
+		return borr;
+	}
 }
