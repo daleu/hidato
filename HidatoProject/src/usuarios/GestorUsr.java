@@ -57,6 +57,14 @@ public class GestorUsr {
 		}
 		return trobat;
 	}
+        
+        public boolean comprovarUsrMod(String u){
+		boolean trobat=false;
+                File aux = new File("Usuaris/" + u);
+                if (aux.exists()) trobat = true;
+                else trobat = false;
+		return trobat;
+	}
 	
 	//Modifica el nom d'un Usuari
 	public boolean modUsr(String uact, String unou, String pass){

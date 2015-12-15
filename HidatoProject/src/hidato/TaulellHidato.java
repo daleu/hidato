@@ -11,17 +11,6 @@ public class TaulellHidato extends Taulell {
 	
 	private int perposar;
 	private int posats;
-
-	public TaulellHidato(Casilla[][] mat1, int[][] mat2, int[] give, int[] star, int tam, int perpos, int posat){
-		super(tam);
-		Matriu_joc=mat1;
-		Matriu_solucio=mat2;
-		given=give;
-		start=star;
-		tamany=tam;
-		perposar=perpos;
-		posats=posat;
-	}
 	
 	public TaulellHidato(int tam) {
 		super(tam);
@@ -38,56 +27,15 @@ public class TaulellHidato extends Taulell {
 		}
 	}
 	
-	public boolean fesTaulell(int[][] input) {
-		perposar=0;
-		posats=0;
-        List<Integer> list = new ArrayList<Integer>();
- 
-        Matriu_solucio = new int[input.length+2][input[0].length+2];
-        for (int x=0; x<tamany+2;  ++x){
-        	Matriu_solucio[0][x] = -1;
-        	Matriu_solucio[x][0] = -1;
-        	Matriu_solucio[tamany+1][x] = -1;
-        	Matriu_solucio[x][tamany+1] = -1;
-        }
-        
-        for(int i=1; i<tamany+1; ++i){
-        	for (int j=1;j<tamany+1; ++j){
-        		Matriu_solucio[i][j]= input[i-1][j-1];
-        		if (input[i-1][j-1]==-1){
-        			Matriu_joc[i-1][j-1].setPosicion(j-1,i-1);
-        			Matriu_joc[i-1][j-1].setValor(-1);
-        			Matriu_joc[i-1][j-1].setEditable(false);
-        		}
-        		else if (input[i-1][j-1]==0){
-        			Matriu_joc[i-1][j-1].setPosicion(j-1,i-1);
-        			Matriu_joc[i-1][j-1].setValor(0);
-        			Matriu_joc[i-1][j-1].setEditable(true);
-        			++perposar;
-        		}
-        		else {
-        			Matriu_joc[i-1][j-1].setPosicion(j-1,i-1);
-        			Matriu_joc[i-1][j-1].setValor(input[i-1][j-1]);
-        			Matriu_joc[i-1][j-1].setEditable(false);
-        			list.add(input[i-1][j-1]);
-                    if (input[i-1][j-1] == 1) start = new int[]{i,j};
-        		}
-        	}
-        }
-        
-        Collections.sort(list);
-
-        given = new int[list.size()];
-        for (int i = 0; i < given.length; i++){
-            given[i] = list.get(i);
-            System.out.println(given[i]);
-        }
-        
-        CtrlJoc juego = new CtrlJoc();
-        if((start != null) && (given != null) && (Matriu_solucio != null)) System.out.println("\nSolucionant...");
-        else System.out.println("\nHi ha hagut un error");
-        
-        return juego.solucionador(start[0],start[1],1,0,given,Matriu_solucio);
+	public TaulellHidato(Casilla[][] mat1, int[][] mat2, int[] give, int[] star, int perpos, int posat){
+		super(mat1.length);
+		Matriu_joc=mat1;
+		Matriu_solucio=mat2;
+		given=give;
+		start=star;
+		tamany=mat1.length;
+		perposar=perpos;
+		posats=posat;
 	}
 	
 	//GETS PER GESTIO TAULELLS
@@ -166,56 +114,6 @@ public class TaulellHidato extends Taulell {
 		}
 		
 		return aux;
-	}
-	
-	public void crearTaulellRandom(int forats, int nombresFixos){
-		perposar=(tamany*tamany)-forats-2-nombresFixos;
-		posats=0;
-		List<Integer> list = new ArrayList<Integer>();
-		
-		CtrlJoc juego = new CtrlJoc();
-		
-		int[][] input = new int[tamany][tamany];
-		boolean[][] inputb = new boolean [tamany][tamany];
-		
-		for (int i=0; i<tamany; ++i){
-			for (int j=0;j<tamany; ++j){
-				inputb[i][j] = true;
-				input[i][j] = 0;
-			}
-		}
-		
-		juego.generador(forats, nombresFixos, tamany, input, inputb);
-		
-		Matriu_solucio = new int[input.length+2][input[0].length+2];
-        for (int x=0; x<tamany+2;  ++x){
-        	Matriu_solucio[0][x] = -1;
-        	Matriu_solucio[x][0] = -1;
-        	Matriu_solucio[tamany+1][x] = -1;
-        	Matriu_solucio[x][tamany+1] = -1;
-        }
-		
-        for(int i=1; i<tamany+1; ++i){
-        	for (int j=1;j<tamany+1; ++j){
-        		Matriu_solucio[i][j]= input[i-1][j-1];
-
-        		Matriu_joc[i-1][j-1].setPosicion(j-1,i-1);
-    			Matriu_joc[i-1][j-1].setEditable(inputb[i-1][j-1]);
-    			if(inputb[i-1][j-1]) Matriu_joc[i-1][j-1].setValor(0);
-    			else {
-    				Matriu_joc[i-1][j-1].setValor(input[i-1][j-1]);
-    				if (input[i-1][j-1]!=-1) list.add(input[i-1][j-1]);
-    				if (input[i-1][j-1]==1) start = new int[]{i,j};
-    			}
-        	}
-        }
-        
-        Collections.sort(list);
-        given = new int[list.size()];
-        for (int i = 0; i < given.length; i++){
-            given[i] = list.get(i);
-            System.out.println(given[i]);
-        }
 	}
 	
 	public boolean[] modValor(int fila, int columna, int valor){

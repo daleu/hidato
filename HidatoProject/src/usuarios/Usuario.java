@@ -7,12 +7,12 @@ public class Usuario {
 	
 	/*Constructora*/
 	public Usuario(String u, String p) {
-		this.username = u;
-		this.password = p;
+		username = new String(u);
+		password = new String(p);
 	}
 	
 	public String getUsr(){
-		return username;
+            return username;
 	}
 	
 	public String getPass(){

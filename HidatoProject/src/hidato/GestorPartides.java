@@ -14,7 +14,7 @@ public class GestorPartides {
 	}
 	
 	public Partida getPartida(String id, String user){
-		Partida nova = new Partida();
+		Partida nova = null;
 		try{
 			
 			File mid = new File("Partides/" + user + "/" + id + "/Taulell/mida.txt");
@@ -79,26 +79,23 @@ public class GestorPartides {
 			aux.setPosats(posats);
 			scpost.close();
 			
-			
 			File perpos = new File("Partides/" + user + "/" + id + "/Taulell/perposar.txt");
 			Scanner scperpos = new Scanner(perpos);
 			int perposar = scperpos.nextInt();
 			aux.setPerPosar(perposar);
 			scperpos.close();
 			
-			nova.setTaulell(aux);
-			
 			File temps = new File("Partides/" + user + "/" + id, "time.txt");
 			Scanner sctemps = new Scanner(temps);
 			int pertemps = sctemps.nextInt();
-			nova.setTime(pertemps);
 			sctemps.close();
 			
 			File pen = new File("Partides/" + user + "/" + id, "penalitzacio.txt");		
 			Scanner scpen = new Scanner(pen);
 			int pe = scpen.nextInt();
-			nova.setPenalitzacio(pe);
 			scpen.close();
+			
+			nova = new Partida(pertemps, aux, pe);
 			
 		} catch(IOException e){
 			System.out.println("Error al carregar el fitxer");

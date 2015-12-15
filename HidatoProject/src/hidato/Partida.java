@@ -9,16 +9,17 @@ class Partida{
 
 // Creadores
 	
-	//Aleatoria
-	public Partida(){
-		Random aux = new Random();
-		int x = aux.nextInt(12)+4;
-		this.taulellh = new TaulellHidato(x);
-		taulellh.crearTaulellRandom((x*x)/5, (x*x)/3);
-		this.temps = new Contador();
-		temps.iniciar();
-		score = 0;
-		penal=0;
+	//Especificada
+	public Partida(Integer score, Contador temps, TaulellHidato th, int penal) {
+		this.score = score;
+		this.temps = temps;
+		this.taulellh = th;
+		this.penal = penal;
+	}
+	
+	//Tailor-Made para el getPartida del Gestor
+	public Partida(int temps, TaulellHidato th, int penal){
+		this(0, new Contador(temps,false), th, penal);
 	}
 	
 	//Repositori
@@ -31,7 +32,7 @@ class Partida{
 	}
 	
 	//Carregar Partida
-	public Partida(Partida aux){
+	public Partida(Partida aux) {
 		taulellh = aux.getTaulell();
 		temps = new Contador(aux.getTime(),false);
 		temps.iniciar();
@@ -39,15 +40,6 @@ class Partida{
 		penal = aux.getPenalitzacio();
 	}
 	
-	//Personalitzada
-	public Partida(int forats, int mida, int fixos){
-		this.taulellh = new TaulellHidato(mida);
-		this.taulellh.crearTaulellRandom(forats, fixos);
-		this.temps = new Contador();
-		temps.iniciar();
-		score = 0;
-		penal=0;
-	}
 
 // Modificadores
 	//Nomes s'executara en el cas que finalitzem la partida.

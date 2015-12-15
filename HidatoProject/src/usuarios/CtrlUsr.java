@@ -17,8 +17,8 @@ public class CtrlUsr {
 	//Afegim un nou Usuari
 	public boolean afegirUsuari(String u, String p) {
 		boolean afegit = false;
-		current = new Usuario(u, p);
-		afegit=gu.afegirUsuari(current);
+		Usuario aux = new Usuario(u, p);
+		afegit=gu.afegirUsuari(aux);
 		return afegit;
 	}
 	
@@ -28,16 +28,16 @@ public class CtrlUsr {
 		boolean loguejat = false;
 		Usuario newCurrent = new Usuario(u, p);
 		loguejat=gu.comprovarUsr(newCurrent);
-		if (loguejat) current = newCurrent;
+		if (loguejat) current = new Usuario(u, p);
 		return loguejat;
 	}
 	
 	//Ens modifica el nostre nom d'usuari
 	public boolean modUsr(String uact, String unou){
 		boolean fet = false;
-		if (uact.equals(current.getUsr())){
+		if (uact.equals(current.getUsr()) & !gu.comprovarUsrMod(unou)){
 			Usuario newCurrent = new Usuario(unou, current.getPass());
-			fet=gu.modUsr(uact, unou, newCurrent.getPass());
+			fet = gu.modUsr(uact, unou, newCurrent.getPass());
 			GestorTaulells aux1 = new GestorTaulells();
 			aux1.modTaulellUsr(uact, unou);
 			GestorPartides aux2 = new GestorPartides();
@@ -60,16 +60,16 @@ public class CtrlUsr {
 		return fet;
 	}
 	
-	public boolean esbUsr(String usr){
+	public boolean esbUsr(String pass){
 		boolean fet = false;
-		if (usr.equals(current.getUsr())){
-			fet=gu.esbUsuari(usr);
+		if (pass.equals(current.getPass())){
+			fet=gu.esbUsuari(current.getUsr());
 			GestorTaulells aux1 = new GestorTaulells();
-			aux1.esbTaulellsUsr(usr);
+			aux1.esbTaulellsUsr(current.getUsr());
 			GestorPartides aux2 = new GestorPartides();
-			aux2.esbPartidaUsr(usr);
+			aux2.esbPartidaUsr(current.getUsr());
 			CtrlRanking aux3 = new CtrlRanking();
-			aux3.deleteUsrRanking(usr);
+			aux3.deleteUsrRanking(current.getUsr());
 		}
 		return fet;
 	}

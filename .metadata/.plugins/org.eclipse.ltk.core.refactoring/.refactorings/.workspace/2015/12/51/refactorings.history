@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete 10 resources" deleteContents="false" description="Delete 10 resources" element1="/DriverCtrlPartida" element10="/DriverUsr" element2="/DriverCtrlRanking" element3="/DriverCtrlUsr" element4="/DriverGenerador" element5="/DriverPairIntString" element6="/DriverPartida" element7="/DriverRanking" element8="/DriverSolucionador" element9="/DriverTimer" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="10" stamp="1450130132159"/>
+</session>

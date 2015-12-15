@@ -75,4 +75,84 @@ public class CtrlRanking {
 		GestorRanking gr = new GestorRanking();
 		gr.store(r);
 	}
+        
+        public String[] getFacil() {
+		ArrayList<PairIntString> facaux = r.getRank(1);
+		String fac[] = new String [facaux.size()]; 
+		int i = 0;
+		PairIntString aux = null;
+		ListIterator<PairIntString> it = facaux.listIterator();
+		while(i < facaux.size()) {
+			aux = it.next();
+			fac[i] = i + " " + Integer.toString(aux.getFirst()) + " " + aux.getSecond() ;
+			++i;
+		}
+		return fac;
+	}
+	public String[] getNormal() {
+		ArrayList<PairIntString> noraux = r.getRank(2);
+		String nor[] = new String [noraux.size()]; 
+		int i = 0;
+		PairIntString aux = null;
+		ListIterator<PairIntString> it = noraux.listIterator();
+		while(i < noraux.size()) {
+			aux = it.next();
+			nor[i] = i + " " + Integer.toString(aux.getFirst()) + " " + aux.getSecond() ;
+			++i;
+		}
+		return nor;
+	}
+	public String[] getDificil() {
+		ArrayList<PairIntString> difaux = r.getRank(3);
+		String dif[] = new String [difaux.size()]; 
+		int i = 0;
+		PairIntString aux = null;
+		ListIterator<PairIntString> it = difaux.listIterator();
+		while(i < difaux.size()) {
+			aux = it.next();
+			dif[i] = i + " " + Integer.toString(aux.getFirst()) + " " + aux.getSecond() ;
+			++i;
+		}
+		return dif;
+	}
+        
+        public String[] getFacilUsr(String usr) {
+		ArrayList<PairIntString> facaux = r.getRank(1);
+		String fac[] = new String [facaux.size()]; 
+		int i = 0;
+		PairIntString aux = null;
+		ListIterator<PairIntString> it = facaux.listIterator();
+		while(i < facaux.size()) {
+			aux = it.next();
+			if ((aux.getSecond().equals(usr))) fac[i] = i + " " + Integer.toString(aux.getFirst()) + " " + aux.getSecond() ;
+			++i;
+		}
+		return fac;
+	}
+	public String[] getNormalUsr(String usr) {
+		ArrayList<PairIntString> noraux = r.getRank(2);
+		String nor[] = new String [noraux.size()]; 
+		int i = 0;
+		PairIntString aux = null;
+		ListIterator<PairIntString> it = noraux.listIterator();
+		while(i < noraux.size()) {
+			aux = it.next();
+			if ((aux.getSecond().equals(usr))) nor[i] = i + " " + Integer.toString(aux.getFirst()) + " " + aux.getSecond() ;
+			++i;
+		}
+		return nor;
+	}
+	public String[] getDificilUsr(String usr) {
+		ArrayList<PairIntString> difaux = r.getRank(3);
+		String dif[] = new String [difaux.size()]; 
+		int i = 0;
+		PairIntString aux = null;
+		ListIterator<PairIntString> it = difaux.listIterator();
+		while(i < difaux.size()) {
+			aux = it.next();
+			if ((aux.getSecond().equals(usr))) dif[i] = i + " " + Integer.toString(aux.getFirst()) + " " + aux.getSecond() ;
+			++i;
+		}
+		return dif;
+	}
 }

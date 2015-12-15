@@ -20,7 +20,7 @@ public class Taulell {
 		return Matriu_joc[fila][columna].getValor();
 	}
 	
-	//Retorna el valor de la casella de la matriu solució
+	//Retorna el valor de la casella de la matriu solucio
 	//que es troba a la fila fila i a la columna columna.
 	public int GetValor_sol (int fila, int columna) {
 		return Matriu_solucio [fila][columna];
@@ -33,9 +33,9 @@ public class Taulell {
 		return GetValor_joc (fila,columna) == GetValor_sol(fila, columna);
 	}
 	
-	//Com a precondició, la casella modificada no pot ser casella predefinida. 
+	//Com a precondicio, la casella modificada no pot ser casella predefinida. 
 	//Modifica el valor de la casella situada a la fila fila i la columna col de la matriu joc. 
-	//Si es deixa en blanc, el valor de la casella será zero.
+	//Si es deixa en blanc, el valor de la casella sera zero.
 	public void modifica_valor (int new_valor, int fila, int columna) throws IOException {
 		if (!Matriu_joc[fila][columna].getEditable()){
 			throw new IOException ("Error:Casella no editable");

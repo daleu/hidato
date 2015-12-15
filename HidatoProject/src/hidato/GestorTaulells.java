@@ -12,8 +12,9 @@ public class GestorTaulells {
 			
 	}
 	
-	public TaulellHidato getTaulell(String id, String nom_usr){ //load
+	public int[][] getTaulell(String id, String nom_usr){ //load
 		TaulellHidato aux = new TaulellHidato(0);
+		int[][] input = null;
 		try{
 			File ids =  new File("Taulells/" + nom_usr + "/" + id);
 			if (ids.exists()){ 
@@ -26,7 +27,7 @@ public class GestorTaulells {
 				File t = new File("Taulells/" + nom_usr + "/" + id, id + "_taulell.txt");
 				Scanner scansol = new Scanner(t);
 				
-				int[][] input = new int[mida][mida];
+				input = new int[mida][mida];
 				
 				for (int i=0; i<mida;++i){
 		        	for (int j=0; j<mida; ++j){
@@ -34,13 +35,11 @@ public class GestorTaulells {
 		        	}
 		        }
 				scansol.close();
-				
-				aux.fesTaulell(input);
 			}
 		} catch(IOException ex){
 			
 		}
-		return aux;
+		return input;
 	}		
 		
     public boolean storeTaulell(TaulellHidato aux, String id, String nom_usr){

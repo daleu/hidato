@@ -1,0 +1,75 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Vistas;
+
+import hidato.CtrlPartida;
+import score.CtrlRanking;
+import usuarios.CtrlUsr;
+
+/**
+ *
+ * @author aleue
+ */
+
+public class CtrlVista {
+    private CtrlUsr cu;
+    private CtrlPartida cp;
+    private CtrlRanking cr;
+
+    public CtrlVista(){
+        cu = new CtrlUsr();
+        cr = new CtrlRanking();
+    }
+    
+
+    //Funcions Usuari
+    public boolean afegirUsr(String usr, String pass){
+        return cu.afegirUsuari(usr, pass);
+    }
+    
+    public boolean compUsr(String u, String p){
+        return cu.logUsuari(u, p);
+    }
+    
+    public boolean modUsr(String usr1, String usr2){
+        return cu.modUsr(usr1, usr2);
+    }
+    
+    public boolean modPass(String pass1, String pass2){
+        return cu.modPass(pass1, pass2);
+    }
+    
+    public boolean esbUsr(String pass){
+        return cu.esbUsr(pass);
+    }
+    
+    //Funcions Ranquing
+    public String[] getFacil(){
+        return  cr.getFacil();
+    }
+    
+    public String[] getNormal(){
+        return cr.getNormal();
+    }
+    
+    public String[] getDificil(){
+        return cr.getDificil();
+    }
+    
+    public String[] getFacilUsr(String usr){
+        return cr.getFacilUsr(usr);
+    }
+    
+    public String[] getNormalUsr(String usr){
+        return cr.getNormalUsr(usr);
+    }
+    
+    public String[] getDificilUsr(String usr){
+        return cr.getDificilUsr(usr);
+    }
+    
+}
+
