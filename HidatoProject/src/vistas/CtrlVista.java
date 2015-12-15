@@ -59,15 +59,15 @@ public class CtrlVista {
         return cr.getDificil();
     }
     
-    public String[] getFacilUsr(String usr) {
+    public String[] getRankFacilUsr(String usr) {
         return cr.getFacilUsr(usr);
     }
     
-    public String[] getNormalUsr(String usr) {
+    public String[] getRankNormalUsr(String usr) {
         return cr.getNormalUsr(usr);
     }
     
-    public String[] getDificilUsr(String usr) {
+    public String[] getRankDificilUsr(String usr) {
         return cr.getDificilUsr(usr);
     }
     

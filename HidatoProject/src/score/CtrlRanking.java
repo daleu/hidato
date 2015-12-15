@@ -84,7 +84,7 @@ public class CtrlRanking {
 		ListIterator<PairIntString> it = facaux.listIterator();
 		while(i < facaux.size()) {
 			aux = it.next();
-			fac[i] = i + " " + Integer.toString(aux.getFirst()) + " " + aux.getSecond() ;
+			fac[i] = (i+1) + " " + Integer.toString(aux.getFirst()) + " " + aux.getSecond() ;
 			++i;
 		}
 		return fac;
@@ -97,7 +97,7 @@ public class CtrlRanking {
 		ListIterator<PairIntString> it = noraux.listIterator();
 		while(i < noraux.size()) {
 			aux = it.next();
-			nor[i] = i + " " + Integer.toString(aux.getFirst()) + " " + aux.getSecond() ;
+			nor[i] = (i+1) + " " + Integer.toString(aux.getFirst()) + " " + aux.getSecond() ;
 			++i;
 		}
 		return nor;
@@ -110,7 +110,7 @@ public class CtrlRanking {
 		ListIterator<PairIntString> it = difaux.listIterator();
 		while(i < difaux.size()) {
 			aux = it.next();
-			dif[i] = i + " " + Integer.toString(aux.getFirst()) + " " + aux.getSecond() ;
+			dif[i] = (i+1) + " " + Integer.toString(aux.getFirst()) + " " + aux.getSecond() ;
 			++i;
 		}
 		return dif;
@@ -124,7 +124,7 @@ public class CtrlRanking {
 		ListIterator<PairIntString> it = facaux.listIterator();
 		while(i < facaux.size()) {
 			aux = it.next();
-			if ((aux.getSecond().equals(usr))) fac[i] = i + " " + Integer.toString(aux.getFirst()) + " " + aux.getSecond() ;
+			if ((aux.getSecond().equals(usr))) fac[i] = (i+1) + " " + Integer.toString(aux.getFirst()) + " " + aux.getSecond() ;
 			++i;
 		}
 		return fac;
@@ -137,7 +137,7 @@ public class CtrlRanking {
 		ListIterator<PairIntString> it = noraux.listIterator();
 		while(i < noraux.size()) {
 			aux = it.next();
-			if ((aux.getSecond().equals(usr))) nor[i] = i + " " + Integer.toString(aux.getFirst()) + " " + aux.getSecond() ;
+			if ((aux.getSecond().equals(usr))) nor[i] = (i+1) + " " + Integer.toString(aux.getFirst()) + " " + aux.getSecond() ;
 			++i;
 		}
 		return nor;
@@ -150,7 +150,7 @@ public class CtrlRanking {
 		ListIterator<PairIntString> it = difaux.listIterator();
 		while(i < difaux.size()) {
 			aux = it.next();
-			if ((aux.getSecond().equals(usr))) dif[i] = i + " " + Integer.toString(aux.getFirst()) + " " + aux.getSecond() ;
+			if ((aux.getSecond().equals(usr))) dif[i] = (i+1) + " " + Integer.toString(aux.getFirst()) + " " + aux.getSecond() ;
 			++i;
 		}
 		return dif;

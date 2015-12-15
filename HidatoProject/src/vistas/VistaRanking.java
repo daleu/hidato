@@ -5,6 +5,10 @@
  */
 package vistas;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 
@@ -60,13 +64,13 @@ public class VistaRanking extends javax.swing.JPanel {
 
         jScrollPane3.setViewportView(jList3);
 
-        jLabel3.setText("Fácil");
+        jLabel3.setText("F\u00e1cil");
 
         jLabel4.setText("Normal");
 
-        jLabel5.setText("Difícil");
+        jLabel5.setText("Dif\u00edcil");
 
-        jButton1.setText("Atrás");
+        jButton1.setText("Atr\u00e1s");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -151,27 +155,51 @@ public class VistaRanking extends javax.swing.JPanel {
                 .addContainerGap(81, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /////////////////////////////////////////////////////////////////////////
+    
+    private class RankListModel extends DefaultListModel<String> {
+    	public RankListModel(String[] s) {
+    		super();
+    		for(int i = 0; i < s.length; ++i) {
+    			this.addElement(s[i]);
+    		}
+    	}
+    }
+    
+    /////////////////////////////////////////////////////////////////////////
+    
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {     
         String user = jTextField1.getText();
+        System.out.println("Retrieving for " + user);
         if(jTextField1.getText().isEmpty()) JOptionPane.showMessageDialog(frame, "Introduce un nombre de usuario");
         else{
-            String[] facil = vista.getFacilUsr(user);
-            String[] normal = vista.getNormalUsr(user);
-            String[] dificil = vista.getDificilUsr(user);
+        	RankListModel facil = new RankListModel( vista.getRankFacilUsr(user) );
+            RankListModel normal = new RankListModel ( vista.getRankNormalUsr(user) );
+            RankListModel dificil = new RankListModel( vista.getRankDificilUsr(user) );
+            
             jList1 = new JList<String>(facil);
             jList2 = new JList<String>(normal);
             jList3 = new JList<String>(dificil);
+            /*jList1.setModel(facil);
+            jList2.setModel(normal);
+            jList3.setModel(dificil);*/
+            
+            repaint();
         }
-    } 
+    }
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        String[] facil = vista.getRankFacil();
-        String[] normal = vista.getRankNormal();
-        String[] dificil = vista.getRankDificil();
-        jList1 = new JList<String>(facil);
-        jList2 = new JList<String>(normal);
-        jList3 = new JList<String>(dificil);
+    	
+        RankListModel facil = new RankListModel( vista.getRankFacil() );
+        RankListModel normal = new RankListModel ( vista.getRankNormal() );
+        RankListModel dificil = new RankListModel( vista.getRankDificil() );
+        
+        jList1.setModel(facil);
+        jList2.setModel(normal);
+        jList3.setModel(dificil);
+        
+        repaint();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
